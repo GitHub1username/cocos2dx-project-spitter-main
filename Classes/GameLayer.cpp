@@ -254,12 +254,24 @@ void GameLayer::update(float dt)
 			hero->addCoinAmount(coinStr->getCString());
 			(*coin_itr)->addCoinAmount(1);
 			(*coin_itr)->state = COIN_COLLECTED;
+			RoleCardController::getInstance()->collectedVec.push_back(*coin_itr);
 			RoleCardController::getInstance()->coinVec.erase(coin_itr);
 			break;
 		}
 		++coin_itr;
 	}
 
+	auto collected_itr = RoleCardController::getInstance()->collectedVec.begin();
+	while (collected_itr != RoleCardController::getInstance()->collectedVec.end())
+	{
+		if ((*collected_itr)->state == COIN_FREE)
+		{
+			(*collected_itr)->purge();
+			RoleCardController::getInstance()->collectedVec.erase(collected_itr);
+			break;
+		}
+		++collected_itr;
+	}
 
 	if (hero->state != ROLE_FREE && hero->state != ROLE_DEAD)
 	{
