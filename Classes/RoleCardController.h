@@ -26,6 +26,7 @@ public:
 	std::vector<BaseRole *> monsterVec;
 	std::vector<BaseTrap *> trapVec;
 	std::vector<Coin *> coinVec;
+	std::vector<Coin *> collectedVec;
 	BaseRole * getHero();
 };
 

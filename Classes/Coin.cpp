@@ -43,6 +43,11 @@ bool Coin::init(propertyManager * manager,BaseRole * hero)
 	return true;
 }
 
+void Coin::purge()
+{
+	removeFromParent();
+}
+
 void Coin::addCoinAmount(int amount)
 {
 	hero->setcoinAmount(amount + hero->getcoinAmount());
