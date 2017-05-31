@@ -170,6 +170,8 @@ void GameLayer::update(float dt)
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
 		a = EventKeyboard::KeyCode::KEY_A;
 
+	layer->m_pProgressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
+
 	auto itr = RoleCardController::getInstance()->monsterVec.begin();
 	while (itr != RoleCardController::getInstance()->monsterVec.end())
 	{

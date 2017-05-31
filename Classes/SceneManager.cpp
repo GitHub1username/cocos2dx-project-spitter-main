@@ -43,6 +43,8 @@ void SceneManager::goGameScene()
 	gameScene->addChild(layer);
 	ConditionLayer * layer_condition = ConditionLayer::create();
 	layer_condition->tsm = this;
+	layer_condition->layer = layer;
+	layer->layer = layer_condition;
 	gameScene->addChild(layer_condition);
 	Director::getInstance()->replaceScene(gameScene);
 }

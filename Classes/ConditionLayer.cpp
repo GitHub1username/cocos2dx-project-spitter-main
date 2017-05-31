@@ -23,6 +23,17 @@ bool ConditionLayer::init()
 	Menu * menu = Menu::create(menuItem, NULL, NULL);
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
+
+	m_pProgressView = new ProgressView();
+	m_pProgressView->setPosition(ccp(150, 450));
+	m_pProgressView->setScale(3.2f);
+	m_pProgressView->setScaleX(4.4f);
+	m_pProgressView->setBackgroundTexture("res/xue_back.png");
+	m_pProgressView->setForegroundTexture("res/xue_fore.png");
+	m_pProgressView->setTotalProgress(100.0f);
+	m_pProgressView->setCurrentProgress(100.0f);
+	this->addChild(m_pProgressView, 2);
+
 	return true;
 }
 
@@ -32,6 +43,8 @@ void ConditionLayer::menuCallBack(Ref * pSender)
 	{
 		case 101:
 		{
+			this->layer->unscheduleAllSelectors();
+			
 			tsm->goOpenScene();
 		}
 	break;

@@ -1,7 +1,12 @@
 #pragma once
 #include "cocos2d.h"
 #include "SceneManager.h"
+#include "ProgressView.h"
+#include "GameLayer.h"
+
 USING_NS_CC;
+
+class GameLayer;
 class ConditionLayer : public Layer
 {
 public:
@@ -13,5 +18,7 @@ public:
 	void menuCallBack(Ref * pSender);
 public:
 	SceneManager * tsm;
+	ProgressView * m_pProgressView;
+	GameLayer * layer;
 };
 

@@ -37,7 +37,7 @@ bool TextSuperEffects::init(const char * str, const int index)
 	}
 	else if(index == 1)
 	{
-		label->setColor(Color3B::YELLOW);
+		label->setColor(Color3B::BLUE);
 	}
 	
 	this->addChild(label);
