@@ -3,6 +3,7 @@
 #include "OpenLayer.h"
 #include "GameLayer.h"
 #include "HelpLayer.h"
+#include "ConditionLayer.h"
 
 
 
@@ -40,6 +41,9 @@ void SceneManager::goGameScene()
 	GameLayer * layer = GameLayer::create();
 	layer->tsm = this;
 	gameScene->addChild(layer);
+	ConditionLayer * layer_condition = ConditionLayer::create();
+	layer_condition->tsm = this;
+	gameScene->addChild(layer_condition);
 	Director::getInstance()->replaceScene(gameScene);
 }
 

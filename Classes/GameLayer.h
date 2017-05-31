@@ -26,7 +26,6 @@ public:
 	virtual ~GameLayer();
 	CREATE_FUNC(GameLayer);
 	virtual bool init();
-	void menuCallBack(Ref * pSender);
 	void update(float dt);
 public:
 	bool isKeyPressed(EventKeyboard::KeyCode keyCode);
