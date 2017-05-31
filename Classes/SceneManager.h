@@ -14,9 +14,11 @@ public:
 	Scene * loadScene;
 	Scene * openScene;
 	Scene * gameScene;
+	Scene * helpScene;
 
 	void createLoadScene();
 	void goOpenScene();
 	void goGameScene();
+	void goHelpScene();
 };
 #endif

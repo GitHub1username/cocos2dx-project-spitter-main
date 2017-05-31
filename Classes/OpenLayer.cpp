@@ -30,12 +30,17 @@ bool OpenLayer::init()
 	menuItem->setTag(101);
 	menuItem->setPosition(Vec2(winSize.width / 2, winSize.height*0.3));
 
-	MenuItemLabel * menuItem_2 = MenuItemLabel::create(Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 30),
+	MenuItemLabel * menuItem_2 = MenuItemLabel::create(Label::createWithTTF("Help", "fonts/Marker Felt.ttf", 30),
 		CC_CALLBACK_1(OpenLayer::menuCallBack, this));
 	menuItem_2->setTag(102);
-	menuItem_2->setPosition(Vec2(winSize.width / 2, winSize.height*0.15));
+	menuItem_2->setPosition(Vec2(winSize.width / 2, winSize.height*0.2));
 
-	Menu * menu = Menu::create(menuItem, menuItem_2, NULL);
+	MenuItemLabel * menuItem_3 = MenuItemLabel::create(Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 30),
+		CC_CALLBACK_1(OpenLayer::menuCallBack, this));
+	menuItem_3->setTag(103);
+	menuItem_3->setPosition(Vec2(winSize.width / 2, winSize.height*0.1));
+
+	Menu * menu = Menu::create(menuItem, menuItem_2, menuItem_3, NULL);
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
 	return true;
@@ -54,6 +59,14 @@ void OpenLayer::menuCallBack(Ref * pSender)
 		}
 		break;
 		case 102:
+		{
+			auto engine = CocosDenshion::SimpleAudioEngine::getInstance();
+			engine->stopBackgroundMusic();
+
+			tsm->goHelpScene();
+		}
+		break;
+		case 103:
 		{
 			Director::getInstance()->end();
 			exit(0);

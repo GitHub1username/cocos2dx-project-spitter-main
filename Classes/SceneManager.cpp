@@ -2,6 +2,7 @@
 #include "LoadLayer.h"
 #include "OpenLayer.h"
 #include "GameLayer.h"
+#include "HelpLayer.h"
 
 
 
@@ -40,4 +41,16 @@ void SceneManager::goGameScene()
 	layer->tsm = this;
 	gameScene->addChild(layer);
 	Director::getInstance()->replaceScene(gameScene);
+}
+
+void SceneManager::goHelpScene()
+{
+	helpScene = Scene::create();
+	//显示物理世界调试状态, 显示红色的框, 方便调试
+	//gameScene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+
+	HelpLayer * layer = HelpLayer::create();
+	layer->tsm = this;
+	helpScene->addChild(layer);
+	Director::getInstance()->replaceScene(helpScene);
 }
