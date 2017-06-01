@@ -44,6 +44,7 @@ public:
 	Coin * coin;
 	SceneManager * tsm;
 	ConditionLayer * layer;
+	TMXTiledMap * TileMap;
 	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
 };
 #endif

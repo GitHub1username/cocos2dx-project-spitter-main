@@ -39,7 +39,7 @@ bool GameLayer::init()
 	pManager->setDataName("NewHero/NewHero.ExportJson");
 	pManager->setSPEED(2);//前进后退速度应该不一致，有待修改
 	pManager->setGetHitRect({ { -40,-40 },{ 80,80 } });
-	pManager->setHitRect({ {40,-40},{80,80} });
+	pManager->setHitRect({ { 40,-40 },{ 80,80 } });
 	pManager->setHitPoint(pManager->getHitRect().origin);
 	pManager->setGetHitPoint(pManager->getGetHitRect().origin);
 	pManager->setATKLimit(100);
@@ -70,10 +70,10 @@ bool GameLayer::init()
 	pManager2->retain();
 
 	monster = BaseRole::creatWithProperty(pManager2);
-	monster->setPosition(Vec2(600,200));
+	monster->setPosition(Vec2(600, 200));
 	monster->type = static_cast<RoleType>(2);
 
-	this->addChild(monster,1,1);
+	this->addChild(monster, 1, 1);
 
 	propertyManager * pManager3 = propertyManager::create();
 	pManager3->setID(3);
@@ -99,8 +99,8 @@ bool GameLayer::init()
 	propertyManager * pManager4 = propertyManager::create();
 	pManager4->setHitRect({ { -40,-40 },{ 80,80 } });
 	pManager4->setHitPoint(pManager4->getHitRect().origin);
-	pManager4->setArmatureName("hero");
-	pManager4->setDataName("hero/hero.ExportJson");
+	pManager4->setArmatureName("trap1");
+	pManager4->setDataName("trap1/trap1.ExportJson");
 	pManager4->retain();
 
 	trap = BaseTrap::createWithProperty(pManager4, hero);
@@ -166,11 +166,13 @@ bool GameLayer::init()
 void GameLayer::update(float dt)
 {
 	Node::update(dt);
-	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW, 
+	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW,
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
 		a = EventKeyboard::KeyCode::KEY_A;
 
-	layer->m_pProgressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
+
+	layer->progressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
+
 
 	auto itr = RoleCardController::getInstance()->monsterVec.begin();
 	while (itr != RoleCardController::getInstance()->monsterVec.end())
@@ -183,7 +185,7 @@ void GameLayer::update(float dt)
 		}
 		++itr;
 	}
-	if (RoleCardController::getInstance()->monsterVec.size() == 0 )
+	if (RoleCardController::getInstance()->monsterVec.size() == 0)
 	{
 		//this->purge();
 		//赢啦，应该转到胜利界面，或下一关数据读取界面。
@@ -263,11 +265,11 @@ void GameLayer::update(float dt)
 
 bool GameLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 {
-	if (keys[keyCode]) 
+	if (keys[keyCode])
 	{
 		return true;
 	}
-	else 
+	else
 	{
 		return false;
 	}
@@ -275,13 +277,13 @@ bool GameLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 
 int GameLayer::keyPressedDurationDirection()
 {
-	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW, 
+	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW,
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
-	if (isKeyPressed(leftArrow)) 
+	if (isKeyPressed(leftArrow))
 	{
 		return FACE_LEFT;
 	}
-	else if (isKeyPressed(rightArrow)) 
+	else if (isKeyPressed(rightArrow))
 	{
 		return FACE_RIGHT;
 	}
@@ -321,27 +323,27 @@ void GameLayer::setViewPointCenter(Point position)
 {
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	int x = MAX(position.x, visibleSize.width / 2);								
-	int y = MAX(position.y, visibleSize.height / 2);								
+	int x = MAX(position.x, visibleSize.width / 2);
+	int y = MAX(position.y, visibleSize.height / 2);
 	//x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width)
-		//- visibleSize.width / 2);											
+	//- visibleSize.width / 2);											
 	//y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height)
-		//- visibleSize.height / 2);											
+	//- visibleSize.height / 2);											
 
 
 	//屏幕中心点
-	Point pointA = Point(visibleSize.width / 2, visibleSize.height / 2); 					
+	Point pointA = Point(visibleSize.width / 2, visibleSize.height / 2);
 	//使精灵处于屏幕中心，移动地图目标位置
-	Point pointB = Point(x, y); 											
+	Point pointB = Point(x, y);
 	log("目标位置 (%f ,%f) ", pointB.x, pointB.y);
 
 
 	//地图移动偏移量
-	Point offset = pointA - pointB; 											
+	Point offset = pointA - pointB;
 
 
 	log("offset (%f ,%f) ", offset.x, offset.y);
-	this->setPosition(offset);												
+	this->setPosition(offset);
 }
 
 void GameLayer::purge()
