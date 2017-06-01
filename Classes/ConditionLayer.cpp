@@ -18,11 +18,14 @@ bool ConditionLayer::init()
 	MenuItemLabel * menuItem = MenuItemLabel::create(Label::createWithTTF("Back", "fonts/Marker Felt.ttf", 20),
 		CC_CALLBACK_1(ConditionLayer::menuCallBack, this));
 	menuItem->setTag(101);
+
 	menuItem->setPosition(Vec2(winSize.width * 0.90, winSize.height * 0.1));
+
 
 	Menu * menu = Menu::create(menuItem, NULL, NULL);
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
+
 
 	progressView = ProgressView::create();
 	progressView->setPosition(ccp(200, 450));
@@ -30,6 +33,7 @@ bool ConditionLayer::init()
 	progressView->setScaleX(6.4f);
 
 	this->addChild(progressView, 2);
+
 
 	return true;
 }
