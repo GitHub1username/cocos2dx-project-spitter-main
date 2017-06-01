@@ -11,29 +11,32 @@ public:
 	ProgressView();
 
 public:
-	//ÉèÖÃÑªÌõ±³¾°  
+	static ProgressView * create();
+	bool init();
+	//è®¾ç½®è¡€æ¡èƒŒæ™¯  
 	void setBackgroundTexture(const char *pName);
-	//ÉèÖÃÑªÌõÇ°¾°  
+	//è®¾ç½®è¡€æ¡å‰æ™¯  
 	void setForegroundTexture(const char *pName);
-	//ÉèÖÃ×ÜÑªÁ¿  
+	//è®¾ç½®æ€»è¡€é‡  
 	void setTotalProgress(float total);
-	//ÉèÖÃµ±Ç°ÑªÁ¿  
+	//è®¾ç½®å½“å‰è¡€é‡  
 	void setCurrentProgress(float progress);
-	//µÃµ½µ±Ç°ÑªÁ¿  
+	//å¾—åˆ°å½“å‰è¡€é‡  
 	float getCurrentProgress() const;
-	//µÃµ½×ÜÑªÁ¿  
+	//å¾—åˆ°æ€»è¡€é‡  
 	float getTotalProgress() const;
 
 private:
-	//ÉèÖÃÇ°¾°ÑªÌõÏÔÊ¾µÄ³¤¶È  
+	//è®¾ç½®å‰æ™¯è¡€æ¡æ˜¾ç¤ºçš„é•¿åº¦  
 	void setForegroundTextureRect(const CCRect &rect);
 
 private:
-	CCSprite *m_progressBackground;//±³¾°ÑªÌõ  
-	CCSprite *m_progressForeground;//Ç°¾°ÑªÌõ  
-	float m_totalProgress;//×ÜÑªÁ¿  
-	float m_currentProgress;//µ±Ç°ÑªÁ¿  
-	float m_scale;//·Å´ó±¶Êı  
+	CCSprite *progressBackground;//èƒŒæ™¯è¡€æ¡  
+	CCSprite *progressForeground;//å‰æ™¯è¡€æ¡  
+	float totalProgress;//æ€»è¡€é‡  
+	float currentProgress;//å½“å‰è¡€é‡  
+	float scale;//æ”¾å¤§å€æ•°  
+
 };
 
 #endif  

@@ -2,60 +2,83 @@
 #include "ProgressView.h"  
 
 ProgressView::ProgressView()
-	: m_progressBackground(NULL)
-	, m_progressForeground(NULL)
-	, m_totalProgress(0.0f)
-	, m_currentProgress(0.0f)
-	, m_scale(1.0f)
+	: progressBackground(NULL)
+	, progressForeground(NULL)
+	, totalProgress(0.0f)
+	, currentProgress(0.0f)
+	, scale(1.0f)
 {
 
 }
+ProgressView * ProgressView::create()
+{
+	ProgressView * view = new ProgressView;
+	if (view&&view->init())
+	{
+		view->autorelease();
+	}
+	else
+	{
+		CC_SAFE_DELETE(view);
+		return nullptr;
+	}
+	return view;
+}
+bool ProgressView::init()
+{
+	this->setBackgroundTexture("res/xue_back.png");
+	this->setForegroundTexture("res/xue_fore.png");
+	this->setTotalProgress(100.0f);
+	this->setCurrentProgress(100.0f);
+
+	return true;
+}
 void ProgressView::setBackgroundTexture(const char *pName)
 {
-	m_progressBackground = CCSprite::create(pName);
-	this->addChild(m_progressBackground);
+	progressBackground = CCSprite::create(pName);
+	this->addChild(progressBackground);
 }
 
 void ProgressView::setForegroundTexture(const char *pName)
 {
-	m_progressForeground = CCSprite::create(pName);
-	m_progressForeground->setAnchorPoint(ccp(0.0f, 0.5f));//ÉèÖÃÃªµã  
-	m_progressForeground->setPosition(ccp(-m_progressForeground->getContentSize().width * 0.5f, 0));
-	this->addChild(m_progressForeground);
+	progressForeground = CCSprite::create(pName);
+	progressForeground->setAnchorPoint(ccp(0.0f, 0.5f));//è®¾ç½®é”šç‚¹  
+	progressForeground->setPosition(ccp(-progressForeground->getContentSize().width * 0.5f, 0));
+	this->addChild(progressForeground);
 }
 
 void ProgressView::setTotalProgress(float total)
 {
-	if (m_progressForeground == NULL) { return; }
-	m_scale = m_progressForeground->getContentSize().width / total;
-	m_totalProgress = total;
+	if (progressForeground == NULL) { return; }
+	scale = progressForeground->getContentSize().width / total;
+	totalProgress = total;
 }
 
 void ProgressView::setCurrentProgress(float progress)
 {
-	if (m_progressForeground == NULL) { return; }
+	if (progressForeground == NULL) { return; }
 	if (progress < 0.0f) { progress = 0.0f; }
-	if (progress > m_totalProgress) { progress = m_totalProgress; }
-	m_currentProgress = progress;
-	float rectWidth = progress * m_scale;
-	const CCPoint from = m_progressForeground->getTextureRect().origin;
-	const CCRect rect = CCRectMake(from.x, from.y, rectWidth, m_progressForeground->getContentSize().height);
+	if (progress > totalProgress) { progress = totalProgress; }
+	currentProgress = progress;
+	float rectWidth = progress * scale;
+	const CCPoint from = progressForeground->getTextureRect().origin;
+	const CCRect rect = CCRectMake(from.x, from.y, rectWidth, progressForeground->getContentSize().height);
 	setForegroundTextureRect(rect);
 }
 
 void ProgressView::setForegroundTextureRect(const CCRect &rect)
 {
-	m_progressForeground->setTextureRect(rect);
+	progressForeground->setTextureRect(rect);
 }
 
 
 
 float ProgressView::getCurrentProgress() const
 {
-	return m_currentProgress;
+	return currentProgress;
 }
 
 float ProgressView::getTotalProgress() const
 {
-	return m_totalProgress;
+	return totalProgress;
 }
