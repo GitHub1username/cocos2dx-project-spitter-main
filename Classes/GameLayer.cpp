@@ -14,6 +14,16 @@ GameLayer::~GameLayer()
 
 bool GameLayer::init()
 {
+    TileMap = CCTMXTiledMap::create("map.tmx");
+    addChild(TileMap,0,100);
+    
+    
+    CCTMXObjectGroup* objects = TileMap ->objectGroupNamed("objectsÓ);
+    ValueMap SpawnPoint = objects->objectNamed("SpawnPoint");
+                                                           
+    float x = SpawnPoint["x"].asFloat();
+    float y = SpawnPoint["y"].asFloat();
+
 	//this->onEnter();
 
 	this->scheduleUpdate();
@@ -47,7 +57,7 @@ bool GameLayer::init()
 	pManager->retain();
 
 	hero = BaseRole::creatWithProperty(pManager);
-	hero->setPosition(Vec2(100, 200));
+	hero->setPosition(Point(x,y));
 	hero->type = static_cast<RoleType>(1);
 
 	this->addChild(hero, 1, 1);

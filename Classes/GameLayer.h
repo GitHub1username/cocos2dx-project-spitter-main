@@ -23,6 +23,8 @@ USING_NS_CC;
 class ConditionLayer;
 class GameLayer : public Layer
 {
+private:
+    cocos2d::CCTMXTiledMap *TileMap;
 public:
 	GameLayer();
 	virtual ~GameLayer();
