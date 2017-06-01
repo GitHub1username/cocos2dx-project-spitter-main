@@ -12,6 +12,7 @@
 #include "BaseRole.h"
 #include "BaseTrap.h"
 #include "Coin.h"
+#include "ConditionLayer.h"
 USING_NS_CC;
 
 //typedef enum RoleFace
@@ -19,6 +20,7 @@ USING_NS_CC;
 //	FACE_LEFT = 1,
 //	FACE_RIGHT,
 //}RoleFace;
+class ConditionLayer;
 class GameLayer : public Layer
 {
 public:
@@ -26,7 +28,6 @@ public:
 	virtual ~GameLayer();
 	CREATE_FUNC(GameLayer);
 	virtual bool init();
-	void menuCallBack(Ref * pSender);
 	void update(float dt);
 public:
 	bool isKeyPressed(EventKeyboard::KeyCode keyCode);
@@ -42,6 +43,7 @@ public:
 	BaseTrap * trap;
 	Coin * coin;
 	SceneManager * tsm;
+	ConditionLayer * layer;
 	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
 };
 #endif

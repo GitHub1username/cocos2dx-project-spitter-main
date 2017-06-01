@@ -7,7 +7,7 @@
 #include "SceneManager.h"
 
 USING_NS_CC;
-class LoadLayer :public Layer
+class LoadLayer : public Layer
 {
 public:
 	LoadLayer();

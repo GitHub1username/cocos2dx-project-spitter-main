@@ -160,29 +160,7 @@ bool GameLayer::init()
 	bg_pic->setPosition(Point(winSize.width / 2, winSize.height / 2));
 	this->addChild(bg_pic);
 
-	MenuItemLabel * menuItem = MenuItemLabel::create(Label::createWithTTF("Back", "fonts/Marker Felt.ttf", 20),
-		CC_CALLBACK_1(GameLayer::menuCallBack, this));
-	menuItem->setTag(101);
-	menuItem->setPosition(Vec2(winSize.width * 0.95, winSize.height * 0.1));
-
-	Menu * menu = Menu::create(menuItem, NULL, NULL);
-	menu->setPosition(Point::ZERO);
-	this->addChild(menu);
 	return true;
-}
-
-void GameLayer::menuCallBack(Ref * pSender)
-{
-	switch (((MenuItem *)pSender)->getTag())
-	{
-		case 101:
-		{
-			this->unscheduleAllSelectors();
-			Director::getInstance()->getScheduler()->unscheduleAll();
-			tsm->goOpenScene();
-		}
-		break;
-	}
 }
 
 void GameLayer::update(float dt)
@@ -191,6 +169,8 @@ void GameLayer::update(float dt)
 	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW, 
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
 		a = EventKeyboard::KeyCode::KEY_A;
+
+	layer->progressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
 
 	auto itr = RoleCardController::getInstance()->monsterVec.begin();
 	while (itr != RoleCardController::getInstance()->monsterVec.end())
