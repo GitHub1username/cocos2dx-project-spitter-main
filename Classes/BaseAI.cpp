@@ -49,7 +49,7 @@ void BaseAI::updateFunc(float dt)
 {
 	//int i = 0;
 	std::vector<BaseRole *> roleVec;
-	if (baseRole->type == TYPE_HERO)//???喵喵喵，如果是==TYPE_HERO就会中断，迷
+	if (baseRole->type == TYPE_HERO)
 	{
 		roleVec = RoleCardController::getInstance()->monsterVec;
 	} 
