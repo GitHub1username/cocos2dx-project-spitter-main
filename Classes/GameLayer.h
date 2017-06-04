@@ -23,6 +23,7 @@ USING_NS_CC;
 class ConditionLayer;
 class GameLayer : public Layer
 {
+	
 public:
 	GameLayer();
 	virtual ~GameLayer();
@@ -36,6 +37,8 @@ public:
 	void setViewPointCenter(Point position);
 public:
 	void purge();
+	Point tileCoordForPosition(Point position);
+	void setPlayerPosition(Point position);
 public:
 	BaseRole * hero;
 	BaseRole * monster;
@@ -44,7 +47,8 @@ public:
 	Coin * coin;
 	SceneManager * tsm;
 	ConditionLayer * layer;
-	TMXTiledMap * TileMap;
+	cocos2d::TMXTiledMap * _tileMap;
+	cocos2d::TMXLayer * _meta;
 	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
 };
 #endif

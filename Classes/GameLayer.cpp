@@ -14,6 +14,20 @@ GameLayer::~GameLayer()
 
 bool GameLayer::init()
 {
+	
+	_tileMap = TMXTiledMap::create("TileMap.tmx");
+
+	addChild(_tileMap, -1);
+
+	TMXObjectGroup* group = _tileMap->getObjectGroup("Objects");
+	ValueMap spawnPoint = group->getObject("SpawnPoint");
+
+	_meta = _tileMap->getLayer("Meta");
+	_meta->setVisible(false);
+
+	float x = spawnPoint["x"].asFloat();
+	float y = spawnPoint["y"].asFloat();
+
 	//this->onEnter();
 
 	this->scheduleUpdate();
@@ -47,7 +61,7 @@ bool GameLayer::init()
 	pManager->retain();
 
 	hero = BaseRole::creatWithProperty(pManager);
-	hero->setPosition(Vec2(100, 200));
+	hero->setPosition(Vec2(x, y));
 	hero->type = static_cast<RoleType>(1);
 
 	this->addChild(hero, 1, 1);
@@ -156,10 +170,10 @@ bool GameLayer::init()
 	ai->startRoleAI();
 
 	auto winSize = Director::getInstance()->getWinSize();
-	auto bg_pic = Sprite::create("res/background_demo.png");
+	auto bg_pic = Sprite::create("res/Map/background.jpg");
 	bg_pic->setPosition(Point(winSize.width / 2, winSize.height / 2));
 	this->addChild(bg_pic);
-
+	
 	return true;
 }
 
@@ -257,7 +271,9 @@ void GameLayer::update(float dt)
 
 	if (hero->state != ROLE_FREE && hero->state != ROLE_DEAD)
 	{
+		auto playerPos = hero->getPosition();
 		hero->getBaseFSM()->switchActionState(keyPressedDurationAcion());
+		this->setPlayerPosition(playerPos);
 	}
 
 	this->setViewPointCenter(hero->getPosition());
@@ -325,10 +341,10 @@ void GameLayer::setViewPointCenter(Point position)
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	int x = MAX(position.x, visibleSize.width / 2);
 	int y = MAX(position.y, visibleSize.height / 2);
-	//x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width)
-	//- visibleSize.width / 2);											
-	//y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height)
-	//- visibleSize.height / 2);											
+	x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width)
+		- visibleSize.width / 2);
+	y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height)
+		- visibleSize.height / 2);
 
 
 	//ÆÁÄ»ÖÐÐÄµã
@@ -352,4 +368,28 @@ void GameLayer::purge()
 	Director::getInstance()->getScheduler()->unschedule(schedule_selector(GameLayer::update), this);
 	RoleCardController::getInstance()->purge();
 	this->removeFromParent();
+}
+
+Point GameLayer::tileCoordForPosition(Point position)
+{
+	int x = static_cast<int>(position.x / _tileMap->getTileSize().width);
+	int y = static_cast<int>(((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) / _tileMap->getTileSize().height);
+	return Point(x, y);
+}
+
+void GameLayer::setPlayerPosition(Point position)
+{
+	Point tileCoord = this->tileCoordForPosition(position);
+	int tileGid = _meta->getTileGIDAt(tileCoord);
+	if (tileGid) {
+		auto properties = _tileMap->getPropertiesForGID(tileGid).asValueMap();
+		if (!properties.empty()) {
+			auto collision = properties["Collidable"].asString();
+			if ("True" == collision) {
+				hero->setPosition(position);
+				return;
+			}
+		}
+	}
+	//hero->setPosition(position);
 }

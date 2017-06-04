@@ -37,6 +37,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
+
+	Director::getInstance()->setProjection(kCCDirectorProjection2D);
 	//glview->setFrameSize(864, 480);
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
@@ -93,7 +95,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->runWithScene(manager->loadScene);
 
 	glview->setDesignResolutionSize(864.0f, 480.0f, ResolutionPolicy::FIXED_HEIGHT);
-	director->setContentScaleFactor(864.0f / 480.0f);
+	director->setContentScaleFactor(1.0f);
     return true;
 }
 
