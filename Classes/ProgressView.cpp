@@ -42,7 +42,7 @@ void ProgressView::setBackgroundTexture(const char *pName)
 void ProgressView::setForegroundTexture(const char *pName)
 {
 	progressForeground = CCSprite::create(pName);
-	progressForeground->setAnchorPoint(ccp(0.0f, 0.5f));//è®¾ç½®é”šç‚¹  
+	progressForeground->setAnchorPoint(ccp(0.0f, 0.5f));//ÉèÖÃÃªµã  
 	progressForeground->setPosition(ccp(-progressForeground->getContentSize().width * 0.5f, 0));
 	this->addChild(progressForeground);
 }

@@ -18,9 +18,7 @@ public:
 	void menuCallBack(Ref * pSender);
 public:
 	SceneManager * tsm;
-
 	ProgressView * progressView;
-
 	GameLayer * layer;
 };
 
