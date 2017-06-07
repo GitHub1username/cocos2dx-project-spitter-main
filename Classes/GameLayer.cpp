@@ -44,6 +44,7 @@ bool GameLayer::init()
 {
 	
 	_tileMap = TMXTiledMap::create("TileMap.tmx");
+	_tileMap->setPosition(ccp(0, 0));
 
 	addChild(_tileMap, -1);
 
@@ -55,7 +56,7 @@ bool GameLayer::init()
 
 	float x = spawnPoint["x"].asFloat();
 	float y = spawnPoint["y"].asFloat();
-
+	log("%f %f", x, y);
 	this->onEnter();
 
 	this->scheduleUpdate();
@@ -309,39 +310,47 @@ void GameLayer::update(float dt)
 
 void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 {
+	log("touch");
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	auto touchPoint = touch->getLocation();
+	//auto touchPoint = touch->getLocation();
+	//log("%f %f", touchPoint.x, touchPoint.y);
+	//touchPoint = _tileMap-> convertToWorldSpace(touchPoint);
+	//touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
 
 	auto projectile = Sprite::create("Projectile.png", Rect(0, 0, 20, 20));
 	projectile->setPosition(hero->getPosition());
 
 	// Determine offset of location to projectile
-	int offX = touchPoint.x - projectile->getPosition().x;
-	int offY = touchPoint.y - projectile->getPosition().y;
+	//int offX = touchPoint.x - projectile->getPosition().x;
+	//int offY = touchPoint.y - projectile->getPosition().y;
+	//log("%f %f", touchPoint.x, touchPoint.y);
+	//log("%f %f", projectile->getPosition().x, projectile->getPosition().y);
 
 	// Bail out if we are shooting down or backwards
-	if (offX <= 0) return;
+	//if (offX <= 0) return;
 
 	// Ok to add now - we've double checked position
 	this->addChild(projectile);
 
+	//auto point = CCDirector::sharedDirector()->convertToGL(projectile->getPosition());
+	//log("%f %f", point.x, point.y);
 	// Determine where we wish to shoot the projectile to
-	int realX = visibleSize.width + (projectile->getContentSize().width / 2);
-	float ratio = (float)offY / (float)offX;
-	int realY = (realX * ratio) + projectile->getPosition().y;
-	auto realDest = Point(realX, realY);
+	//int realX = visibleSize.width + (projectile->getContentSize().width / 2);
+	//float ratio = -(float)offY / (float)offX;
+	//int realY = ((realX - point.x) * ratio) + point.y;
+	auto realDest = Point(projectile->getPositionX()+100, projectile->getPositionY());
 
 	// Determine the length of how far we're shooting
-	int offRealX = realX - projectile->getPosition().x;
-	int offRealY = realY - projectile->getPosition().y;
-	float length = sqrtf((offRealX*offRealX) + (offRealY*offRealY));
-	float velocity = 960 / 1; 	// 960pixels/1sec
-	float realMoveDuration = length / velocity;
+	//int offRealX = realX - point.x;
+	//int offRealY = realY - point.y;
+	//float length = sqrtf((offRealX*offRealX) + (offRealY*offRealY));
+	//float velocity = 960 / 1; 	// 960pixels/1sec
+	//float realMoveDuration = length / velocity;
 
 	// Move projectile to actual endpoint
 	projectile->runAction(
-		Sequence::create(MoveTo::create(realMoveDuration, realDest),
+		Sequence::create(MoveTo::create(.5f, realDest),
 			CallFuncN::create(CC_CALLBACK_1(GameLayer::spriteMoveFinished, this)),
 			NULL));
 }
@@ -424,14 +433,14 @@ void GameLayer::setViewPointCenter(Point position)
 	Point pointA = Point(visibleSize.width / 2, visibleSize.height / 2);
 	//使精灵处于屏幕中心，移动地图目标位置
 	Point pointB = Point(x, y);
-	log("目标位置 (%f ,%f) ", pointB.x, pointB.y);
+	//log("目标位置 (%f ,%f) ", pointB.x, pointB.y);
 
 
 	//地图移动偏移量
 	Point offset = pointA - pointB;
 
 
-	log("offset (%f ,%f) ", offset.x, offset.y);
+	//log("offset (%f ,%f) ", offset.x, offset.y);
 	this->setPosition(offset);
 }
 
