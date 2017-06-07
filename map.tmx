@@ -1,40 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="27" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="背景2" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
-  <image source="2D古城堡itgem3d 2D PIXEL SIDE SCROLLER LEVEL SET/side_scroller_dungeon_chip_set_01/2d_pixel_tileset01_full.png" width="1024" height="1024"/>
-  <tile id="37">
-   <properties>
-    <property name="Collidable" type="bool" value="false"/>
-   </properties>
-  </tile>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="瓦片地图图块" tilewidth="32" tileheight="32" tilecount="1089" columns="33">
+  <image source="瓦片地图图块.png" width="1056" height="1056"/>
  </tileset>
- <tileset firstgid="1025" name="dungeon01_platform_half_wall_m_v4a" tilewidth="32" tileheight="32" tilecount="2" columns="2">
-  <image source="2D古城堡itgem3d 2D PIXEL SIDE SCROLLER LEVEL SET/side_scroller_dungeon_chip_set_01/dungeon01_platform_half_wall_m_v4a.png" width="64" height="32"/>
- </tileset>
- <tileset firstgid="1027" name="platform_ledge" tilewidth="32" tileheight="32" tilecount="2" columns="2">
-  <image source="2D古城堡itgem3d 2D PIXEL SIDE SCROLLER LEVEL SET/side_scroller_dungeon_chip_set_01/platform_ledge.png" width="64" height="32"/>
- </tileset>
- <tileset firstgid="1029" name="platform_half_wall" tilewidth="32" tileheight="32" tilecount="2" columns="2">
-  <image source="2D古城堡itgem3d 2D PIXEL SIDE SCROLLER LEVEL SET/side_scroller_dungeon_chip_set_01/platform_half_wall.png" width="64" height="32"/>
- </tileset>
- <tileset firstgid="1031" name="column1" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="2D古城堡itgem3d 2D PIXEL SIDE SCROLLER LEVEL SET/side_scroller_dungeon_chip_set_01/dungeon01_column_v1_ruin_b.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="1032" name="column2" tilewidth="32" tileheight="32" tilecount="2" columns="1">
-  <image source="2D古城堡itgem3d 2D PIXEL SIDE SCROLLER LEVEL SET/side_scroller_dungeon_chip_set_01/dungeon01_column_v1.png" width="32" height="64"/>
- </tileset>
- <imagelayer name="图像图层 1">
-  <image source="背景图.jpg" width="864" height="480"/>
- </imagelayer>
- <layer name="块层 1" width="27" height="15">
+ <layer name="块层 1" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztkjlOxDAUhp04GaZjp6CiGeAYSEhQst0A5hLUwCFoWQo6JBYxBRXLBVgkSsRyAZaa72li5WE5GmdEyS99+p3n2L+fE2P+FSObGZNlYc//iBjl0FDeZN0kfpH0XrtQs+cWTCtvRp5RNF8jJ3T2gSJL+uwU8wm1NCvd5Qi7SVmX8aZCqxPIcvmtirNohfqaSbs5s2nvLKfFPrNEfk8b1pi2LZ/fmF+XOrThKek/y9cWOdv2d20HXuBVsuEdnsXJvCzekbtw5NxTw7urkI7gwMtKWb8X8a87ybfR3+WYcW6rGYYRGIUpWy8rpBM4hTM4Vy73sC/9wSHM2cotonUH9/AAj8ol6wq/hhu4Nd3+xmAcJmAQhrz+3fwSLMMKrMIafLDHJ3zBt3LJ+gFsYjlm
+   eJztlsEOgCAMQ/X/f9qjF4br2hHUNuFCStnTsOw8xjpfuCKOrBAvq9Fd5qh7WZmjlt2lCkdXT2B7UJSJ1MB6O+4zR91rjrlP8Z47M7KZu35jRObI7bNeJNMcz/usF8lk+0eUgZ5X3BVxMOr47lGuOWr3KfRnDnQuYLzMXKP6Hyv7rjlq2Qpv9rw51niz5yscHX1s57kkUlQHU4M56jLHPFMxPyjeaZYDnWMQsX0X5RjtmeO5jqzXHPfelziYXoPWlj2PCP0f5qjlIufNMd/fhUPxzhX9IzvXKPpuVMOqXHPU7uvK/RpH14rq6FgX3KUCDQ==
   </data>
  </layer>
- <objectgroup name="对象层 1"/>
- <layer name="块层 2" width="27" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqoAwAGVAAB
-  </data>
- </layer>
+ <objectgroup name="objects"/>
 </map>
