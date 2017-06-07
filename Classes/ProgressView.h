@@ -11,6 +11,8 @@ public:
 	ProgressView();
 
 public:
+	static ProgressView * create();
+	bool init();
 	//设置血条背景  
 	void setBackgroundTexture(const char *pName);
 	//设置血条前景  
@@ -29,11 +31,11 @@ private:
 	void setForegroundTextureRect(const CCRect &rect);
 
 private:
-	CCSprite *m_progressBackground;//背景血条  
-	CCSprite *m_progressForeground;//前景血条  
-	float m_totalProgress;//总血量  
-	float m_currentProgress;//当前血量  
-	float m_scale;//放大倍数  
+	CCSprite *progressBackground;//背景血条  
+	CCSprite *progressForeground;//前景血条  
+	float totalProgress;//总血量  
+	float currentProgress;//当前血量  
+	float scale;//放大倍数  
 };
 
 #endif  

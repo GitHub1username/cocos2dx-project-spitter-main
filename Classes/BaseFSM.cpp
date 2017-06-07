@@ -83,14 +83,16 @@ void BaseFSM::changeToJump()
 	{
 		role->state = ROLE_JUMP;
 		role->getArmature()->getAnimation()->play("default", -1, 0);
-	
+		
+		//CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(0, 0), 10, 1);//Ç¿ÖÆÆðÌø
+		//role->runAction(jump);
 		role->jump();
 	}
 }
 
 void BaseFSM::changeToLeft()
 {
-	if (role->state == ROLE_ATTACK)
+	if (role->state == ROLE_ATTACK || role->state == ROLE_JUMP)
 	{
 		return;
 	}
@@ -117,7 +119,7 @@ void BaseFSM::changeToLeft()
 
 void BaseFSM::changeToRight()
 {
-	if (role->state == ROLE_ATTACK)
+	if (role->state == ROLE_ATTACK || role->state == ROLE_JUMP )
 	{
 		return;
 	}

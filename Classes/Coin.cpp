@@ -52,7 +52,7 @@ void Coin::addCoinAmount(int amount)
 {
 	hero->setcoinAmount(amount + hero->getcoinAmount());
 	__String * coinStr = __String::createWithFormat("%d", amount);
-	hero->fallHP(coinStr->getCString());
+	//hero->fallHP(coinStr->getCString());
 }
 
 void Coin::draw(cocos2d::Renderer * renderer, const cocos2d::Mat4 & transform, uint32_t flags)

@@ -12,22 +12,9 @@ GameLayer::~GameLayer()
 {
 }
 
-bool GameLayer::init()
+void GameLayer::onEnter()
 {
-    TileMap = CCTMXTiledMap::create("map.tmx");
-    addChild(TileMap,0,100);
-    
-    
-    CCTMXObjectGroup* objects = TileMap ->objectGroupNamed("objectsÓ);
-    ValueMap SpawnPoint = objects->objectNamed("SpawnPoint");
-                                                           
-    float x = SpawnPoint["x"].asFloat();
-    float y = SpawnPoint["y"].asFloat();
-
-	//this->onEnter();
-
-	this->scheduleUpdate();
-	//Director::getInstance()->getScheduler()->schedule(schedule_selector(ControlLayer::update), this, (float)1 / 60, false);
+	Layer::onEnter();
 
 	auto listener = EventListenerKeyboard::create();
 
@@ -39,8 +26,54 @@ bool GameLayer::init()
 		keys[keyCode] = false;
 	};
 
+	auto listener2 = EventListenerTouchOneByOne::create();
+	listener2->setSwallowTouches(true);
+
+	listener2->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event* event)
+	{
+		return true;
+	};
+	listener2->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+}
+
+bool GameLayer::init()
+{
+	
+	_tileMap = TMXTiledMap::create("TileMap.tmx");
+	_tileMap->setPosition(ccp(0, 0));
+
+	addChild(_tileMap, -1);
+
+	TMXObjectGroup* group = _tileMap->getObjectGroup("Objects");
+	ValueMap spawnPoint = group->getObject("SpawnPoint");
+
+	_meta = _tileMap->getLayer("Meta");
+	_meta->setVisible(true);
+
+	float x = spawnPoint["x"].asFloat();
+	float y = spawnPoint["y"].asFloat();
+	log("%f %f", x, y);
+	this->onEnter();
+
+	this->scheduleUpdate();
+	//Director::getInstance()->getScheduler()->schedule(schedule_selector(ControlLayer::update), this, (float)1 / 60, false);
+/*
+	auto listener = EventListenerKeyboard::create();
+
+	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
+		keys[keyCode] = true;
+	};
+
+	listener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
+		keys[keyCode] = false;
+	};
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+*/
 	propertyManager * pManager = propertyManager::create();
 	pManager->setID(1);
 	pManager->setATK(50);
@@ -49,7 +82,7 @@ bool GameLayer::init()
 	pManager->setDataName("NewHero/NewHero.ExportJson");
 	pManager->setSPEED(2);//Ç°½øºóÍËËÙ¶ÈÓ¦¸Ã²»Ò»ÖÂ£¬ÓÐ´ýÐÞ¸Ä
 	pManager->setGetHitRect({ { -40,-40 },{ 80,80 } });
-	pManager->setHitRect({ {40,-40},{80,80} });
+	pManager->setHitRect({ { 40,-40 },{ 80,80 } });
 	pManager->setHitPoint(pManager->getHitRect().origin);
 	pManager->setGetHitPoint(pManager->getGetHitRect().origin);
 	pManager->setATKLimit(100);
@@ -57,7 +90,7 @@ bool GameLayer::init()
 	pManager->retain();
 
 	hero = BaseRole::creatWithProperty(pManager);
-	hero->setPosition(Point(x,y));
+	hero->setPosition(Vec2(x, y));
 	hero->type = static_cast<RoleType>(1);
 
 	this->addChild(hero, 1, 1);
@@ -80,10 +113,10 @@ bool GameLayer::init()
 	pManager2->retain();
 
 	monster = BaseRole::creatWithProperty(pManager2);
-	monster->setPosition(Vec2(600,200));
+	monster->setPosition(Vec2(600, 200));
 	monster->type = static_cast<RoleType>(2);
 
-	this->addChild(monster,1,1);
+	this->addChild(monster, 1, 1);
 
 	propertyManager * pManager3 = propertyManager::create();
 	pManager3->setID(3);
@@ -109,8 +142,8 @@ bool GameLayer::init()
 	propertyManager * pManager4 = propertyManager::create();
 	pManager4->setHitRect({ { -40,-40 },{ 80,80 } });
 	pManager4->setHitPoint(pManager4->getHitRect().origin);
-	pManager4->setArmatureName("hero");
-	pManager4->setDataName("hero/hero.ExportJson");
+	pManager4->setArmatureName("trap1");
+	pManager4->setDataName("trap1/trap1.ExportJson");
 	pManager4->retain();
 
 	trap = BaseTrap::createWithProperty(pManager4, hero);
@@ -166,21 +199,23 @@ bool GameLayer::init()
 	ai->startRoleAI();
 
 	auto winSize = Director::getInstance()->getWinSize();
-	auto bg_pic = Sprite::create("res/background_demo.png");
+	auto bg_pic = Sprite::create("res/Map/background.jpg");
 	bg_pic->setPosition(Point(winSize.width / 2, winSize.height / 2));
 	this->addChild(bg_pic);
-
+	
 	return true;
 }
 
 void GameLayer::update(float dt)
 {
 	Node::update(dt);
-	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW, 
+	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW,
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
 		a = EventKeyboard::KeyCode::KEY_A;
 
-	layer->m_pProgressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
+
+	layer->progressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
+
 
 	auto itr = RoleCardController::getInstance()->monsterVec.begin();
 	while (itr != RoleCardController::getInstance()->monsterVec.end())
@@ -193,7 +228,7 @@ void GameLayer::update(float dt)
 		}
 		++itr;
 	}
-	if (RoleCardController::getInstance()->monsterVec.size() == 0 )
+	if (RoleCardController::getInstance()->monsterVec.size() == 0)
 	{
 		//this->purge();
 		//Ó®À²£¬Ó¦¸Ã×ªµ½Ê¤Àû½çÃæ£¬»òÏÂÒ»¹ØÊý¾Ý¶ÁÈ¡½çÃæ¡£
@@ -265,19 +300,74 @@ void GameLayer::update(float dt)
 
 	if (hero->state != ROLE_FREE && hero->state != ROLE_DEAD)
 	{
+		auto playerPos = hero->getPosition();
 		hero->getBaseFSM()->switchActionState(keyPressedDurationAcion());
+		this->setPlayerPosition(playerPos);
 	}
 
 	this->setViewPointCenter(hero->getPosition());
 }
 
+void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
+{
+	log("touch");
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+
+	//auto touchPoint = touch->getLocation();
+	//log("%f %f", touchPoint.x, touchPoint.y);
+	//touchPoint = _tileMap-> convertToWorldSpace(touchPoint);
+	//touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
+
+	auto projectile = Sprite::create("Projectile.png", Rect(0, 0, 20, 20));
+	projectile->setPosition(hero->getPosition());
+
+	// Determine offset of location to projectile
+	//int offX = touchPoint.x - projectile->getPosition().x;
+	//int offY = touchPoint.y - projectile->getPosition().y;
+	//log("%f %f", touchPoint.x, touchPoint.y);
+	//log("%f %f", projectile->getPosition().x, projectile->getPosition().y);
+
+	// Bail out if we are shooting down or backwards
+	//if (offX <= 0) return;
+
+	// Ok to add now - we've double checked position
+	this->addChild(projectile);
+
+	//auto point = CCDirector::sharedDirector()->convertToGL(projectile->getPosition());
+	//log("%f %f", point.x, point.y);
+	// Determine where we wish to shoot the projectile to
+	//int realX = visibleSize.width + (projectile->getContentSize().width / 2);
+	//float ratio = -(float)offY / (float)offX;
+	//int realY = ((realX - point.x) * ratio) + point.y;
+	auto realDest = Point(projectile->getPositionX()+100, projectile->getPositionY());
+
+	// Determine the length of how far we're shooting
+	//int offRealX = realX - point.x;
+	//int offRealY = realY - point.y;
+	//float length = sqrtf((offRealX*offRealX) + (offRealY*offRealY));
+	//float velocity = 960 / 1; 	// 960pixels/1sec
+	//float realMoveDuration = length / velocity;
+
+	// Move projectile to actual endpoint
+	projectile->runAction(
+		Sequence::create(MoveTo::create(.5f, realDest),
+			CallFuncN::create(CC_CALLBACK_1(GameLayer::spriteMoveFinished, this)),
+			NULL));
+}
+
+void GameLayer::spriteMoveFinished(Object * pSender)
+{
+	Sprite * sprite = (Sprite *) pSender;
+	this->removeChild(sprite);
+}
+
 bool GameLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 {
-	if (keys[keyCode]) 
+	if (keys[keyCode])
 	{
 		return true;
 	}
-	else 
+	else
 	{
 		return false;
 	}
@@ -285,13 +375,13 @@ bool GameLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 
 int GameLayer::keyPressedDurationDirection()
 {
-	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW, 
+	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW,
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
-	if (isKeyPressed(leftArrow)) 
+	if (isKeyPressed(leftArrow))
 	{
 		return FACE_LEFT;
 	}
-	else if (isKeyPressed(rightArrow)) 
+	else if (isKeyPressed(rightArrow))
 	{
 		return FACE_RIGHT;
 	}
@@ -331,27 +421,27 @@ void GameLayer::setViewPointCenter(Point position)
 {
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	int x = MAX(position.x, visibleSize.width / 2);								
-	int y = MAX(position.y, visibleSize.height / 2);								
-	//x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width)
-		//- visibleSize.width / 2);											
-	//y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height)
-		//- visibleSize.height / 2);											
+	int x = MAX(position.x, visibleSize.width / 2);
+	int y = MAX(position.y, visibleSize.height / 2);
+	x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width)
+		- visibleSize.width / 2);
+	y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height)
+		- visibleSize.height / 2);
 
 
 	//ÆÁÄ»ÖÐÐÄµã
-	Point pointA = Point(visibleSize.width / 2, visibleSize.height / 2); 					
+	Point pointA = Point(visibleSize.width / 2, visibleSize.height / 2);
 	//Ê¹¾«Áé´¦ÓÚÆÁÄ»ÖÐÐÄ£¬ÒÆ¶¯µØÍ¼Ä¿±êÎ»ÖÃ
-	Point pointB = Point(x, y); 											
-	log("Ä¿±êÎ»ÖÃ (%f ,%f) ", pointB.x, pointB.y);
+	Point pointB = Point(x, y);
+	//log("Ä¿±êÎ»ÖÃ (%f ,%f) ", pointB.x, pointB.y);
 
 
 	//µØÍ¼ÒÆ¶¯Æ«ÒÆÁ¿
-	Point offset = pointA - pointB; 											
+	Point offset = pointA - pointB;
 
 
-	log("offset (%f ,%f) ", offset.x, offset.y);
-	this->setPosition(offset);												
+	//log("offset (%f ,%f) ", offset.x, offset.y);
+	this->setPosition(offset);
 }
 
 void GameLayer::purge()
@@ -360,4 +450,44 @@ void GameLayer::purge()
 	Director::getInstance()->getScheduler()->unschedule(schedule_selector(GameLayer::update), this);
 	RoleCardController::getInstance()->purge();
 	this->removeFromParent();
+}
+
+Point GameLayer::tileCoordForPosition(Point position)
+{
+	int x;
+	if (hero->face == FACE_RIGHT)
+	{
+		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
+	}
+	else
+	{
+		x = static_cast<int>((position.x - 40) / _tileMap->getTileSize().width);
+	}
+	
+	int y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40)/ _tileMap->getTileSize().height);
+	return Point(x, y);
+}
+
+void GameLayer::setPlayerPosition(Point position)
+{
+	Point tileCoord = this->tileCoordForPosition(hero->getPosition());
+	int tileGid = _meta->getTileGIDAt(tileCoord);
+	if (tileGid) 
+	{
+		auto properties = _tileMap->getPropertiesForGID(tileGid).asValueMap();
+		if (!properties.empty()) 
+		{
+			auto collision = properties["Collidable"].asString();
+			if ("True" == collision) 
+			{
+				hero->stopActionByTag(233);
+				//position.y -= 5;
+				hero->setPosition(position);
+				//hero->getBaseFSM()->changeToDefault();
+
+				return;
+			}
+		}
+	}
+	//hero->setPosition(position);
 }
