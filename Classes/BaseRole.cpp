@@ -124,7 +124,7 @@ void BaseRole::jumpEnd()
 	this->getBaseFSM()->changeToDefault();
 }
 
-void BaseRole::shoot(RoleType type)
+Bullet * BaseRole::shoot(RoleType type)
 {
 	if (type == TYPE_HERO)
 	{
@@ -137,9 +137,10 @@ void BaseRole::shoot(RoleType type)
 
 		auto projectile = Bullet::create(this, pManager);
 		RoleCardController::getInstance()->bulletVec.push_back(projectile);
+		RoleCardController::getInstance()->retain();
 		projectile->setPosition(this->getPosition());
 
-		this->addChild(projectile);
+		this->addChild(projectile,2,100);
 
 		auto realDest = Point(0, 0);
 
@@ -161,10 +162,8 @@ void BaseRole::shoot(RoleType type)
 		}
 
 
-		projectile->runAction(
-			Sequence::create(MoveTo::create(.5f, realDest),
-				CallFuncN::create(CC_CALLBACK_1(BaseRole::spriteMoveFinished, this)),
-				NULL));
+
+		return projectile;
 	}
 	else
 	{
@@ -177,9 +176,10 @@ void BaseRole::shoot(RoleType type)
 
 		auto projectile = Bullet::create(this, pManager);
 		RoleCardController::getInstance()->enemyBulletVec.push_back(projectile);
+		RoleCardController::getInstance()->retain();
 		projectile->setPosition(this->getPosition());
 
-		this->addChild(projectile);
+		this->addChild(projectile,2);
 
 		auto realDest = Point(0, 0);
 
@@ -205,13 +205,16 @@ void BaseRole::shoot(RoleType type)
 			Sequence::create(MoveTo::create(1.0f, realDest),
 				CallFuncN::create(CC_CALLBACK_1(BaseRole::spriteMoveFinished, this)),
 				NULL));
+		return projectile;
 	}
+	
 }
 
 void BaseRole::spriteMoveFinished(Object * pSender)
 {
-	Sprite * sprite = (Sprite *)pSender;
-	this->removeChild(sprite);
+	Bullet * sprite = (Bullet *)pSender;
+	//this->removeChild(sprite);
+	sprite->state = BULLET_FREE;
 }
 
 
@@ -224,13 +227,13 @@ void BaseRole::changeFaceDirection(RoleFace face)
 {
 	if (face == FACE_LEFT)
 	{
-		armature->setScaleX(-1);
+		armature->setScaleX(1);
 		propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x - propertymanager->getHitRect().size.width, propertymanager->getHitRect().origin.y,propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	} 
 	else if(face == FACE_RIGHT)
 	{
-		armature->setScaleX(1);
+		armature->setScaleX(-1);
 		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}

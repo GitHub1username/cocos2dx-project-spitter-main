@@ -13,7 +13,7 @@ public:
 	virtual bool init();
 public:
 	CC_SYNTHESIZE(int, ID, ID);
-	CC_SYNTHESIZE(int, HP, HP);
+	CC_SYNTHESIZE(float, HP, HP);
 	CC_SYNTHESIZE(int, SPEED, SPEED);
 	CC_SYNTHESIZE(int, ATK, ATK);
 
