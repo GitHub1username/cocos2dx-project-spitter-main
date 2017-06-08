@@ -7,6 +7,7 @@
 #include <iostream>
 #include "BaseRole.h"
 #include "BaseTrap.h"
+#include "Bullet.h"
 USING_NS_CC;
 
 
@@ -27,6 +28,8 @@ public:
 	std::vector<BaseTrap *> trapVec;
 	std::vector<Coin *> coinVec;
 	std::vector<Coin *> collectedVec;
+	std::vector<Bullet *> bulletVec;
+	std::vector<Bullet *> enemyBulletVec;
 	BaseRole * getHero();
 };
 

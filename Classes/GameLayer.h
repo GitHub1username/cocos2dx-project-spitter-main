@@ -13,6 +13,7 @@
 #include "BaseTrap.h"
 #include "Coin.h"
 #include "ConditionLayer.h"
+#include "Bullet.h"
 USING_NS_CC;
 
 //typedef enum RoleFace
@@ -23,12 +24,16 @@ USING_NS_CC;
 class ConditionLayer;
 class GameLayer : public Layer
 {
+	
 public:
 	GameLayer();
 	virtual ~GameLayer();
+	void onEnter();
 	CREATE_FUNC(GameLayer);
 	virtual bool init();
 	void update(float dt);
+	void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
+	void spriteMoveFinished(Object * pSender);
 public:
 	bool isKeyPressed(EventKeyboard::KeyCode keyCode);
 	int keyPressedDurationDirection();
@@ -36,14 +41,18 @@ public:
 	void setViewPointCenter(Point position);
 public:
 	void purge();
+	Point tileCoordForPosition(Point position);
+	void setPlayerPosition(Point position);
 public:
 	BaseRole * hero;
-	BaseRole * monster;
-	BaseRole * monster2;
-	BaseTrap * trap;
-	Coin * coin;
+	//BaseRole * monster;
+	//BaseRole * monster2;
+	//BaseTrap * trap;
+	//Coin * coin;
 	SceneManager * tsm;
 	ConditionLayer * layer;
+	cocos2d::TMXTiledMap * _tileMap;
+	cocos2d::TMXLayer * _meta;
 	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
 };
 #endif

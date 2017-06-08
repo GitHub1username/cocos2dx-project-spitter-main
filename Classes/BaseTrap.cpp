@@ -30,10 +30,12 @@ bool BaseTrap::init(propertyManager * manager,BaseRole * role)
 {
 	this->propertymanager = manager;
 	this->currentPlayer = role;
-	CCSprite::initWithFile("res/mushroom.png");
+
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(propertymanager->getDataName());
 	armature = Armature::create(propertymanager->getArmatureName());
-	armature->getAnimation()->play("default");
+	armature->getAnimation()->play("trap");
+
+	armature->setScale(3.2f);
 
 	this->addChild(armature);
 

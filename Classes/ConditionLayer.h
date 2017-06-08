@@ -18,9 +18,12 @@ public:
 	void menuCallBack(Ref * pSender);
 public:
 	SceneManager * tsm;
-
 	ProgressView * progressView;
-
 	GameLayer * layer;
+	CCLabelTTF* pCoinNum;
+	CCLabelTTF* ammunitionNum;
+	CC_SYNTHESIZE(int, coinNum, coinNum);
+	CC_SYNTHESIZE(int, ammunition, ammunition);
+
 };
 
