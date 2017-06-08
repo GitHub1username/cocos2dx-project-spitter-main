@@ -13,6 +13,7 @@
 #include "BaseTrap.h"
 #include "Coin.h"
 #include "ConditionLayer.h"
+#include "Bullet.h"
 USING_NS_CC;
 
 //typedef enum RoleFace

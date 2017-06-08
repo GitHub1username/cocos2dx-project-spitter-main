@@ -93,7 +93,7 @@ void Bullet::animationEvent(Armature * pArmature, MovementEventType movmentType,
 	}
 }
 
-bool Bullet::isColliding(BaseRole * role, RoleType type)
+bool Bullet::isColliding(BaseRole * role)
 {
 	return getRealRect(this, this->manager->getHitRect()).intersectsRect(role->getRealRect(role, role->propertymanager->getGetHitRect()));
 }

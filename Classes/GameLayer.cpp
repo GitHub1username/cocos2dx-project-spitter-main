@@ -61,19 +61,7 @@ bool GameLayer::init()
 
 	this->scheduleUpdate();
 	//Director::getInstance()->getScheduler()->schedule(schedule_selector(ControlLayer::update), this, (float)1 / 60, false);
-/*
-	auto listener = EventListenerKeyboard::create();
 
-	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		keys[keyCode] = true;
-	};
-
-	listener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		keys[keyCode] = false;
-	};
-
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-*/
 	propertyManager * pManager = propertyManager::create();
 	pManager->setID(1);
 	pManager->setATK(50);
@@ -211,11 +199,24 @@ void GameLayer::update(float dt)
 	Node::update(dt);
 	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW,
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
+		upArrow = EventKeyboard::KeyCode::KEY_UP_ARROW,
+		downArrow = EventKeyboard::KeyCode::KEY_DOWN_ARROW,
 		a = EventKeyboard::KeyCode::KEY_A;
 
 
 	layer->progressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
 
+	auto itr3 = RoleCardController::getInstance()->bulletVec.begin();
+	while (itr3 != RoleCardController::getInstance()->bulletVec.end())
+	{
+		if ((*itr3)->state == BULLET_FREE)
+		{
+			(*itr3)->purge();
+			RoleCardController::getInstance()->bulletVec.erase(itr3);
+			break;
+		}
+		++itr3;
+	}
 
 	auto itr = RoleCardController::getInstance()->monsterVec.begin();
 	while (itr != RoleCardController::getInstance()->monsterVec.end())
@@ -265,9 +266,57 @@ void GameLayer::update(float dt)
 			{
 				//lockRole->getBaseAI()->stopRoleAI();
 				hero->getBaseFSM()->changeToDead();
+				hero->state = ROLE_FREE;
 			}
 		}
 		++trap_itr;
+	}
+
+	//auto enbullert_itr = RoleCardController::getInstance()->bulletVec.begin();
+	//while (enbullert_itr != RoleCardController::getInstance()->bulletVec.end())
+	//{
+	//	for (auto mitr = RoleCardController::getInstance()->monsterVec.begin();mitr != RoleCardController::getInstance()->monsterVec.end();mitr++)
+	//	{
+	//		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*enbullert_itr)->isColliding((*mitr), (*mitr)->type))
+	//		{
+	//			__String * hpStr = __String::createWithFormat("%d", 10);
+	//			(*mitr)->fallHP(hpStr->getCString());
+	//			(*mitr)->propertymanager->setHP((*mitr)->propertymanager->getHP() - 10);
+	//			if ((*mitr)->propertymanager->getHP() <= 0)
+	//			{
+	//				//lockRole->getBaseAI()->stopRoleAI();
+	//				(*mitr)->getBaseFSM()->changeToDead();
+	//				(*mitr)->state = ROLE_FREE;
+	//			}
+	//			break;
+	//		}
+	//	}
+	//	++enbullert_itr;
+	//}
+
+	auto bullert_itr = RoleCardController::getInstance()->bulletVec.begin();
+	auto mitr = RoleCardController::getInstance()->monsterVec.begin();
+	while (bullert_itr != RoleCardController::getInstance()->bulletVec.end())
+	{
+		mitr = RoleCardController::getInstance()->monsterVec.begin();
+		while (mitr != RoleCardController::getInstance()->monsterVec.end())
+		{
+			if (hero->state != ROLE_DEAD && hero->state != ROLE_FREE && (*bullert_itr)->isColliding((*mitr)))
+			{
+				__String * hpStr = __String::createWithFormat("%d", 10);
+				(*mitr)->fallHP(hpStr->getCString());
+				(*mitr)->propertymanager->setHP((*mitr)->propertymanager->getHP() - 10);
+				if ((*mitr)->propertymanager->getHP() <= 0)
+				{
+					//lockRole->getBaseAI()->stopRoleAI();
+					(*mitr)->getBaseFSM()->changeToDead();
+					(*mitr)->state = ROLE_FREE;
+				}
+				//break;
+			}
+			mitr++;
+		}
+		++bullert_itr;
 	}
 
 	auto coin_itr = RoleCardController::getInstance()->coinVec.begin();
@@ -312,53 +361,52 @@ void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	log("touch");
 	Size visibleSize = Director::getInstance()->getVisibleSize();
+	auto pManager = propertyManager::create();
+	pManager->setHitRect({ { -10,-10 },{ 20,20 } });
+	pManager->setHitPoint(pManager->getHitRect().origin);
+	pManager->setArmatureName("coin");
+	pManager->setDataName("coin/coin.ExportJson");
+	pManager->retain();
 
-	//auto touchPoint = touch->getLocation();
-	//log("%f %f", touchPoint.x, touchPoint.y);
-	//touchPoint = _tileMap-> convertToWorldSpace(touchPoint);
-	//touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
-
-	auto projectile = Sprite::create("Projectile.png", Rect(0, 0, 20, 20));
+	auto projectile = Bullet::create(hero, pManager);
+	RoleCardController::getInstance()->bulletVec.push_back(projectile);
 	projectile->setPosition(hero->getPosition());
 
-	// Determine offset of location to projectile
-	//int offX = touchPoint.x - projectile->getPosition().x;
-	//int offY = touchPoint.y - projectile->getPosition().y;
-	//log("%f %f", touchPoint.x, touchPoint.y);
-	//log("%f %f", projectile->getPosition().x, projectile->getPosition().y);
-
-	// Bail out if we are shooting down or backwards
-	//if (offX <= 0) return;
-
-	// Ok to add now - we've double checked position
 	this->addChild(projectile);
 
-	//auto point = CCDirector::sharedDirector()->convertToGL(projectile->getPosition());
-	//log("%f %f", point.x, point.y);
-	// Determine where we wish to shoot the projectile to
-	//int realX = visibleSize.width + (projectile->getContentSize().width / 2);
-	//float ratio = -(float)offY / (float)offX;
-	//int realY = ((realX - point.x) * ratio) + point.y;
-	auto realDest = Point(projectile->getPositionX()+100, projectile->getPositionY());
+	auto realDest = Point(0, 0);
 
-	// Determine the length of how far we're shooting
-	//int offRealX = realX - point.x;
-	//int offRealY = realY - point.y;
-	//float length = sqrtf((offRealX*offRealX) + (offRealY*offRealY));
-	//float velocity = 960 / 1; 	// 960pixels/1sec
-	//float realMoveDuration = length / velocity;
+	if (hero->face == FACE_LEFT)
+	{
+		realDest = Point(projectile->getPositionX() - 200, projectile->getPositionY());
+	}
+	else if (hero->face == FACE_RIGHT)
+	{
+		realDest = Point(projectile->getPositionX() + 200, projectile->getPositionY());
+	}
+	else if (hero->face == FACE_UP)
+	{
+		realDest = Point(projectile->getPositionX(), projectile->getPositionY() + 200);
+	}
+	else if (hero->face == FACE_DOWN)
+	{
+		realDest = Point(projectile->getPositionX(), projectile->getPositionY() - 200);
+	}
 
-	// Move projectile to actual endpoint
+
 	projectile->runAction(
 		Sequence::create(MoveTo::create(.5f, realDest),
 			CallFuncN::create(CC_CALLBACK_1(GameLayer::spriteMoveFinished, this)),
 			NULL));
+	//hero->shoot(hero->type);
 }
 
 void GameLayer::spriteMoveFinished(Object * pSender)
 {
-	Sprite * sprite = (Sprite *) pSender;
-	this->removeChild(sprite);
+	Bullet * sprite = (Bullet *) pSender;
+	//this->removeChild(sprite);
+	sprite->state = BULLET_FREE;
+
 }
 
 bool GameLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
@@ -395,16 +443,18 @@ int GameLayer::keyPressedDurationAcion()
 {
 	auto leftArrow = EventKeyboard::KeyCode::KEY_LEFT_ARROW,
 		rightArrow = EventKeyboard::KeyCode::KEY_RIGHT_ARROW,
+		upArrow = EventKeyboard::KeyCode::KEY_UP_ARROW,
+		downArrow = EventKeyboard::KeyCode::KEY_DOWN_ARROW,
 		a = EventKeyboard::KeyCode::KEY_A,
 		space = EventKeyboard::KeyCode::KEY_SPACE;
 	if (isKeyPressed(a))
 	{
 		return ROLE_ATTACK;
 	}
-	else if (isKeyPressed(space))
-	{
-		return ROLE_JUMP;
-	}
+	//else if (isKeyPressed(space))
+	//{
+	//	return ROLE_JUMP;
+	//}
 	else if (isKeyPressed(leftArrow))
 	{
 		return FACE_LEFT;
@@ -412,6 +462,14 @@ int GameLayer::keyPressedDurationAcion()
 	else if (isKeyPressed(rightArrow))
 	{
 		return FACE_RIGHT;
+	}
+	else if (isKeyPressed(upArrow))
+	{
+		return FACE_UP;
+	}
+	else if (isKeyPressed(downArrow))
+	{
+		return FACE_DOWN;
 	}
 
 	return 0;
@@ -455,16 +513,31 @@ void GameLayer::purge()
 Point GameLayer::tileCoordForPosition(Point position)
 {
 	int x;
+	int y;
 	if (hero->face == FACE_RIGHT)
 	{
 		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
 	}
-	else
+	else if(hero->face == FACE_LEFT)
 	{
 		x = static_cast<int>((position.x - 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
+	}
+	else if (hero->face == FACE_UP)
+	{
+		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) - 40) / _tileMap->getTileSize().height);
+
+	}
+	else if (hero->face == FACE_DOWN)
+	{
+		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
+
 	}
 	
-	int y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40)/ _tileMap->getTileSize().height);
+	
 	return Point(x, y);
 }
 

@@ -21,7 +21,7 @@ public:
 	Bullet();
 	virtual ~Bullet();
 public:
-	Bullet * create(BaseRole * hero,propertyManager * manager);
+	static Bullet * create(BaseRole * hero,propertyManager * manager);
 	bool init(BaseRole * hero,propertyManager * manager);
 	void purge();
 public:
@@ -36,7 +36,8 @@ public:
 	virtual Rect getRealRect(Bullet * bullet, Rect rect);
 	virtual void animationEvent(Armature * pArmature, MovementEventType movmentType, const std::string & movementIDstr);
 public:
-	virtual bool isColliding(BaseRole * role,RoleType type);
+	virtual bool isColliding(BaseRole * role);
+	//传入子弹射的敌人，与当前敌人的种类（怪物或英雄）
 	CC_SYNTHESIZE(Armature *, armature, Armature);
 };
 
