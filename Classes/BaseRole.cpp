@@ -95,12 +95,34 @@ void BaseRole::purge()
 
 void BaseRole::jump()
 {
+	//CCActionInterval* jumpActions = nullptr;
 	/*创建动作，2s，原地跳跃(即落地的地点相对于起跳地点x偏移0，y偏移0)，高度250，弹跳次数1*/
+<<<<<<< HEAD
 	CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(0, 0), 64, 1);
 	/*callFunc也是一个动作，作用是调用一个函数*/
 	CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(BaseRole::jumpEnd));
 	/*组合动作*/
 	CCActionInterval* jumpActions = CCSequence::create(jump, callFunc, NULL);
+=======
+	//if (this->face == FACE_RIGHT)
+	//{
+		CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(64.0, 0), 64, 1);
+		/*callFunc也是一个动作，作用是调用一个函数*/
+		CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(BaseRole::jumpEnd));
+		/*组合动作*/
+		CCActionInterval* jumpActions = CCSequence::create(jump, callFunc, NULL);
+		jumpActions->setTag(233);
+	//}
+	//else
+	//{
+	//	CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(-64.0, 0), 64, 1);
+	//	/*callFunc也是一个动作，作用是调用一个函数*/
+	//	CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(BaseRole::jumpEnd));
+	//	/*组合动作*/
+	//	CCActionInterval* jumpActions = CCSequence::create(jump, callFunc, NULL);
+	//	jumpActions->setTag(233);
+	//}
+>>>>>>> refs/remotes/origin/master
 
 	runAction(jumpActions);
 }
@@ -109,6 +131,97 @@ void BaseRole::jumpEnd()
 {
 	this->getBaseFSM()->changeToDefault();
 }
+
+void BaseRole::shoot(RoleType type)
+{
+	if (type == TYPE_HERO)
+	{
+		auto pManager = propertyManager::create();
+		pManager->setHitRect({ { -10,-10 },{ 20,20 } });
+		pManager->setHitPoint(pManager->getHitRect().origin);
+		pManager->setArmatureName("coin");
+		pManager->setDataName("coin/coin.ExportJson");
+		pManager->retain();
+
+		auto projectile = Bullet::create(this, pManager);
+		RoleCardController::getInstance()->bulletVec.push_back(projectile);
+		projectile->setPosition(this->getPosition());
+
+		this->addChild(projectile);
+
+		auto realDest = Point(0, 0);
+
+		if (this->face == FACE_LEFT)
+		{
+			realDest = Point(projectile->getPositionX() - 200, projectile->getPositionY());
+		}
+		else if (this->face == FACE_RIGHT)
+		{
+			realDest = Point(projectile->getPositionX() + 200, projectile->getPositionY());
+		}
+		else if (this->face == FACE_UP)
+		{
+			realDest = Point(projectile->getPositionX(), projectile->getPositionY() + 200);
+		}
+		else if (this->face == FACE_DOWN)
+		{
+			realDest = Point(projectile->getPositionX(), projectile->getPositionY() - 200);
+		}
+
+
+		projectile->runAction(
+			Sequence::create(MoveTo::create(.5f, realDest),
+				CallFuncN::create(CC_CALLBACK_1(BaseRole::spriteMoveFinished, this)),
+				NULL));
+	}
+	else
+	{
+		auto pManager = propertyManager::create();
+		pManager->setHitRect({ { -10,-10 },{ 20,20 } });
+		pManager->setHitPoint(pManager->getHitRect().origin);
+		pManager->setArmatureName("coin");
+		pManager->setDataName("coin/coin.ExportJson");
+		pManager->retain();
+
+		auto projectile = Bullet::create(this, pManager);
+		RoleCardController::getInstance()->enemyBulletVec.push_back(projectile);
+		projectile->setPosition(this->getPosition());
+
+		this->addChild(projectile);
+
+		auto realDest = Point(0, 0);
+
+		if (this->face == FACE_LEFT)
+		{
+			realDest = Point(projectile->getPositionX() - 400, projectile->getPositionY());
+		}
+		else if (this->face == FACE_RIGHT)
+		{
+			realDest = Point(projectile->getPositionX() + 400, projectile->getPositionY());
+		}
+		else if (this->face == FACE_UP)
+		{
+			realDest = Point(projectile->getPositionX(), projectile->getPositionY() + 400);
+		}
+		else if (this->face == FACE_DOWN)
+		{
+			realDest = Point(projectile->getPositionX(), projectile->getPositionY() - 400);
+		}
+
+
+		projectile->runAction(
+			Sequence::create(MoveTo::create(1.0f, realDest),
+				CallFuncN::create(CC_CALLBACK_1(BaseRole::spriteMoveFinished, this)),
+				NULL));
+	}
+}
+
+void BaseRole::spriteMoveFinished(Object * pSender)
+{
+	Sprite * sprite = (Sprite *)pSender;
+	this->removeChild(sprite);
+}
+
 
 Rect BaseRole::getRealRect(BaseRole * role, Rect rect)
 {
@@ -126,6 +239,16 @@ void BaseRole::changeFaceDirection(RoleFace face)
 	else if(face == FACE_RIGHT)
 	{
 		armature->setScaleX(1);
+		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		this->face = face;
+	}
+	else if (face == FACE_UP)
+	{
+		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		this->face = face;
+	}
+	else if (face == FACE_DOWN)
+	{
 		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}
