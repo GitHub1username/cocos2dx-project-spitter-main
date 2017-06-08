@@ -36,9 +36,11 @@ bool Bullet::init(BaseRole * hero , propertyManager * manager)
 	armature = Armature::create(manager->getArmatureName());
 	armature->getAnimation()->play("coin");
 
+	//Sprite * sprite = Sprite::create("Projectile.png");
+
 	this->addChild(armature);
 
-	armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Bullet::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+//	armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Bullet::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 	return true;
 }

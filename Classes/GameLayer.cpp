@@ -85,47 +85,83 @@ bool GameLayer::init()
 
 	//缺少一个生成类，复制粘贴是什么辣鸡
 
-	propertyManager * pManager2 = propertyManager::create();
-	pManager2->setID(2);
-	pManager2->setATK(10);
-	pManager2->setHP(100);
-	pManager2->setArmatureName("enemy");
-	pManager2->setDataName("enemy/enemy.ExportJson");
-	pManager2->setSPEED(1);//前进后退速度应该不一致，有待修改
-	pManager2->setGetHitRect({ { -40,-40 },{ 80,80 } });
-	pManager2->setHitRect({ { 40,-40 },{ 80,80 } });
-	pManager2->setHitPoint(pManager2->getHitRect().origin);
-	pManager2->setGetHitPoint(pManager2->getGetHitRect().origin);
-	pManager2->setATKLimit(100);
-	pManager2->setLockLimit(200);
-	pManager2->retain();
+	for (int i =0;i<2;i++)
+	{
+		propertyManager * pManager2 = propertyManager::create();
+		pManager2->setID(2);
+		pManager2->setATK(10);
+		pManager2->setHP(100);
+		pManager2->setArmatureName("enemy");
+		pManager2->setDataName("enemy/enemy.ExportJson");
+		pManager2->setSPEED(1);//前进后退速度应该不一致，有待修改
+		pManager2->setGetHitRect({ { -40,-40 },{ 80,80 } });
+		pManager2->setHitRect({ { 40,-40 },{ 80,80 } });
+		pManager2->setHitPoint(pManager2->getHitRect().origin);
+		pManager2->setGetHitPoint(pManager2->getGetHitRect().origin);
+		pManager2->setATKLimit(100);
+		pManager2->setLockLimit(200);
+		pManager2->retain();
 
-	monster = BaseRole::creatWithProperty(pManager2);
-	monster->setPosition(Vec2(600, 200));
-	monster->type = static_cast<RoleType>(2);
+		auto monster = BaseRole::creatWithProperty(pManager2);
+		monster->setPosition(Vec2(400 + i*100, 200));
+		monster->type = static_cast<RoleType>(2);
+		//monster->retain();
 
-	this->addChild(monster, 1, 1);
+		this->addChild(monster, 1, 1);
 
-	propertyManager * pManager3 = propertyManager::create();
-	pManager3->setID(3);
-	pManager3->setATK(10);
-	pManager3->setHP(100);
-	pManager3->setArmatureName("hero");
-	pManager3->setDataName("hero/hero.ExportJson");
-	pManager3->setSPEED(1);//前进后退速度应该不一致，有待修改
-	pManager3->setGetHitRect({ { -40,-40 },{ 80,80 } });
-	pManager3->setHitRect({ { 40,-40 },{ 80,80 } });
-	pManager3->setHitPoint(pManager3->getHitRect().origin);
-	pManager3->setGetHitPoint(pManager3->getGetHitRect().origin);
-	pManager3->setATKLimit(100);
-	pManager3->setLockLimit(200);
-	pManager3->retain();
+		BaseFSM * basefsm2 = BaseFSM::createFSM(monster);
+		basefsm2->retain();
+		monster->setBaseFSM(basefsm2);
 
-	monster2 = BaseRole::creatWithProperty(pManager3);
-	monster2->setPosition(Vec2(400, 200));
-	monster2->type = static_cast<RoleType>(2);
+		BaseAI * ai = BaseAI::creatAI(monster);
+		ai->retain();
+		monster->setBaseAI(ai);
 
-	this->addChild(monster2, 1, 1);
+		ai->startRoleAI();
+
+		RoleCardController::getInstance()->monsterVec.push_back(monster);
+	}
+	//propertyManager * pManager2 = propertyManager::create();
+	//pManager2->setID(2);
+	//pManager2->setATK(10);
+	//pManager2->setHP(100);
+	//pManager2->setArmatureName("enemy");
+	//pManager2->setDataName("enemy/enemy.ExportJson");
+	//pManager2->setSPEED(1);//前进后退速度应该不一致，有待修改
+	//pManager2->setGetHitRect({ { -40,-40 },{ 80,80 } });
+	//pManager2->setHitRect({ { 40,-40 },{ 80,80 } });
+	//pManager2->setHitPoint(pManager2->getHitRect().origin);
+	//pManager2->setGetHitPoint(pManager2->getGetHitRect().origin);
+	//pManager2->setATKLimit(100);
+	//pManager2->setLockLimit(200);
+	//pManager2->retain();
+
+	//monster = BaseRole::creatWithProperty(pManager2);
+	//monster->setPosition(Vec2(600, 200));
+	//monster->type = static_cast<RoleType>(2);
+
+	//this->addChild(monster, 1, 1);
+
+	//propertyManager * pManager3 = propertyManager::create();
+	//pManager3->setID(3);
+	//pManager3->setATK(10);
+	//pManager3->setHP(100);
+	//pManager3->setArmatureName("hero");
+	//pManager3->setDataName("hero/hero.ExportJson");
+	//pManager3->setSPEED(1);//前进后退速度应该不一致，有待修改
+	//pManager3->setGetHitRect({ { -40,-40 },{ 80,80 } });
+	//pManager3->setHitRect({ { 40,-40 },{ 80,80 } });
+	//pManager3->setHitPoint(pManager3->getHitRect().origin);
+	//pManager3->setGetHitPoint(pManager3->getGetHitRect().origin);
+	//pManager3->setATKLimit(100);
+	//pManager3->setLockLimit(200);
+	//pManager3->retain();
+
+	//monster2 = BaseRole::creatWithProperty(pManager3);
+	//monster2->setPosition(Vec2(400, 200));
+	//monster2->type = static_cast<RoleType>(2);
+
+	//this->addChild(monster2, 1, 1);
 
 	propertyManager * pManager4 = propertyManager::create();
 	pManager4->setHitRect({ { -40,-40 },{ 80,80 } });
@@ -134,7 +170,7 @@ bool GameLayer::init()
 	pManager4->setDataName("trap1/trap1.ExportJson");
 	pManager4->retain();
 
-	trap = BaseTrap::createWithProperty(pManager4, hero);
+	auto trap = BaseTrap::createWithProperty(pManager4, hero);
 	//trap = static_cast<BaseTrap *>(Sprite::create("res/mushroom.png"));
 	//trap->autorelease();
 	trap->init(pManager4, hero);
@@ -148,7 +184,7 @@ bool GameLayer::init()
 	pManager5->setDataName("coin/coin.ExportJson");
 	pManager5->retain();
 
-	coin = Coin::createWithProperty(pManager5, hero);
+	auto coin = Coin::createWithProperty(pManager5, hero);
 	//trap = static_cast<BaseTrap *>(Sprite::create("res/mushroom.png"));
 	//trap->autorelease();
 	//coin->init(pManager5, hero);
@@ -157,8 +193,8 @@ bool GameLayer::init()
 
 	RoleCardController::getInstance()->heroVec.push_back(hero);
 	RoleCardController::getInstance()->setHeroID(hero->propertymanager->getID());
-	RoleCardController::getInstance()->monsterVec.push_back(monster);
-	RoleCardController::getInstance()->monsterVec.push_back(monster2);
+	//RoleCardController::getInstance()->monsterVec.push_back(monster);
+	//RoleCardController::getInstance()->monsterVec.push_back(monster2);
 	RoleCardController::getInstance()->trapVec.push_back(trap);
 	RoleCardController::getInstance()->coinVec.push_back(coin);
 	RoleCardController::getInstance()->retain();
@@ -167,24 +203,24 @@ bool GameLayer::init()
 	basefsm->retain();
 	hero->setBaseFSM(basefsm);
 
-	BaseFSM * basefsm2 = BaseFSM::createFSM(monster);
-	basefsm2->retain();
-	monster->setBaseFSM(basefsm2);
+	//BaseFSM * basefsm2 = BaseFSM::createFSM(monster);
+	//basefsm2->retain();
+	//monster->setBaseFSM(basefsm2);
 
-	BaseFSM * basefsm3 = BaseFSM::createFSM(monster2);
-	basefsm3->retain();
-	monster2->setBaseFSM(basefsm3);
+	//BaseFSM * basefsm3 = BaseFSM::createFSM(monster2);
+	//basefsm3->retain();
+	//monster2->setBaseFSM(basefsm3);
 
-	BaseAI * ai2 = BaseAI::creatAI(monster);
-	ai2->retain();
-	monster->setBaseAI(ai2);
+	//BaseAI * ai2 = BaseAI::creatAI(monster);
+	//ai2->retain();
+	//monster->setBaseAI(ai2);
 
-	BaseAI * ai = BaseAI::creatAI(monster2);
-	ai->retain();
-	monster2->setBaseAI(ai);
+	//BaseAI * ai = BaseAI::creatAI(monster2);
+	//ai->retain();
+	//monster2->setBaseAI(ai);
 
-	ai2->startRoleAI();
-	ai->startRoleAI();
+	//ai2->startRoleAI();
+	//ai->startRoleAI();
 
 	auto winSize = Director::getInstance()->getWinSize();
 	auto bg_pic = Sprite::create("res/Map/background.jpg");
@@ -327,6 +363,7 @@ void GameLayer::update(float dt)
 			__String * coinStr = __String::createWithFormat("%d", 1);
 			hero->addCoinAmount(coinStr->getCString());
 			(*coin_itr)->addCoinAmount(1);
+			this->layer->setcoinNum(this->layer->getcoinNum() + 1);
 			(*coin_itr)->state = COIN_COLLECTED;
 			RoleCardController::getInstance()->collectedVec.push_back(*coin_itr);
 			RoleCardController::getInstance()->coinVec.erase(coin_itr);
@@ -355,14 +392,29 @@ void GameLayer::update(float dt)
 	}
 
 	this->setViewPointCenter(hero->getPosition());
+
+	char str[100] = { '0' };
+	sprintf(str, "%d", this->layer->getcoinNum());
+	this->layer->pCoinNum->setString(str);
+	this->layer->pCoinNum->setVisible(true);
+
+	sprintf(str, "%d", this->layer->getammunition());
+	this->layer->ammunitionNum->setString(str);
+	this->layer->ammunitionNum->setVisible(true);
+	
 }
 
 void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	log("touch");
+	if (this->layer->getammunition()==0)
+	{
+		return;
+	}
+
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	auto pManager = propertyManager::create();
-	pManager->setHitRect({ { -10,-10 },{ 20,20 } });
+	pManager->setHitRect({ { -40,-40 },{ 80,80 } });
 	pManager->setHitPoint(pManager->getHitRect().origin);
 	pManager->setArmatureName("coin");
 	pManager->setDataName("coin/coin.ExportJson");
@@ -372,7 +424,9 @@ void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 	RoleCardController::getInstance()->bulletVec.push_back(projectile);
 	projectile->setPosition(hero->getPosition());
 
-	this->addChild(projectile);
+	projectile->state = BULLET_DEFAULT;
+
+	this->addChild(projectile, 2);
 
 	auto realDest = Point(0, 0);
 
@@ -393,12 +447,14 @@ void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 		realDest = Point(projectile->getPositionX(), projectile->getPositionY() - 200);
 	}
 
-
+	log("check");
 	projectile->runAction(
 		Sequence::create(MoveTo::create(.5f, realDest),
 			CallFuncN::create(CC_CALLBACK_1(GameLayer::spriteMoveFinished, this)),
 			NULL));
 	//hero->shoot(hero->type);
+
+	this->layer->setammunition(this->layer->getammunition() - 1);
 }
 
 void GameLayer::spriteMoveFinished(Object * pSender)
