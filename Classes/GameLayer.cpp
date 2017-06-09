@@ -144,11 +144,34 @@ bool GameLayer::init()
 	pManager5->retain();
 
 	auto coin = Coin::createWithProperty(pManager5, hero);
-	//trap = static_cast<BaseTrap *>(Sprite::create("res/mushroom.png"));
-	//trap->autorelease();
-	//coin->init(pManager5, hero);
 	coin->setPosition(Vec2(1000, 200));
 	this->addChild(coin, 1, 1);
+
+	propertyManager * pManager6 = propertyManager::create();
+	pManager6->setHitRect({ { -40,-40 },{ 80,80 } });
+	pManager6->setHitPoint(pManager6->getHitRect().origin);
+	pManager6->setArmatureName("supply1");
+	pManager6->setDataName("supply1/supply1.ExportJson");
+	pManager6->retain();
+
+	auto supply1 = Props::createWithProperty(pManager6, hero);
+	supply1->setPosition(Vec2(1000, 400));
+	supply1->type = BLOOD_BAG;
+	this->addChild(supply1, 1, 1);
+	RoleCardController::getInstance()->propVec.push_back(supply1);
+
+	propertyManager * pManager7 = propertyManager::create();
+	pManager7->setHitRect({ { -40,-40 },{ 80,80 } });
+	pManager7->setHitPoint(pManager7->getHitRect().origin);
+	pManager7->setArmatureName("supply2");
+	pManager7->setDataName("supply2/supply2.ExportJson");
+	pManager7->retain();
+
+	auto supply2 = Props::createWithProperty(pManager7, hero);
+	supply2->setPosition(Vec2(1000, 600));
+	supply2->type = SUPPLY_PACKAGE;
+	this->addChild(supply2, 1, 1);
+	RoleCardController::getInstance()->propVec.push_back(supply2);
 
 	RoleCardController::getInstance()->heroVec.push_back(hero);
 	RoleCardController::getInstance()->setHeroID(hero->propertymanager->getID());
@@ -301,30 +324,69 @@ void GameLayer::update(float dt)
 	auto coin_itr = RoleCardController::getInstance()->coinVec.begin();
 	while (coin_itr != RoleCardController::getInstance()->coinVec.end())
 	{
+		if ((*coin_itr)->state == COIN_FREE)
+		{
+			(*coin_itr)->purge();
+			RoleCardController::getInstance()->coinVec.erase(coin_itr);
+			continue;
+			//这个free掉，后面继续
+		}
+
 		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*coin_itr)->isColliding(hero))
 		{
+			if ((*coin_itr)->state == COIN_COLLECTED)
+			{
+				break;
+			}
 			__String * coinStr = __String::createWithFormat("%d", 1);
 			hero->addCoinAmount(coinStr->getCString());
 			(*coin_itr)->addCoinAmount(1);
 			this->layer->setcoinNum(this->layer->getcoinNum() + 1);
 			(*coin_itr)->state = COIN_COLLECTED;
-			RoleCardController::getInstance()->collectedVec.push_back(*coin_itr);
-			RoleCardController::getInstance()->coinVec.erase(coin_itr);
-			break;
+			break;//一次收集一个
 		}
 		++coin_itr;
 	}
 
-	auto collected_itr = RoleCardController::getInstance()->collectedVec.begin();
-	while (collected_itr != RoleCardController::getInstance()->collectedVec.end())
+	auto prop_itr = RoleCardController::getInstance()->propVec.begin();
+	while (prop_itr != RoleCardController::getInstance()->propVec.end())
 	{
-		if ((*collected_itr)->state == COIN_FREE)
+		if ((*prop_itr)->state == PROPS_FREE)
 		{
-			(*collected_itr)->purge();
-			RoleCardController::getInstance()->collectedVec.erase(collected_itr);
-			break;
+			(*prop_itr)->purge();
+			RoleCardController::getInstance()->propVec.erase(prop_itr);
+			continue;
+			//这个free掉，后面继续
 		}
-		++collected_itr;
+
+		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*prop_itr)->type==SUPPLY_PACKAGE&&(*prop_itr)->isColliding(hero))
+		{
+			//__String * propStr = __String::createWithFormat("%d", 1);
+			//hero->addCoinAmount(coinStr->getCString());
+			//(*coin_itr)->addCoinAmount(1);
+			if ((*prop_itr)->state == PROPS_COLLECTED)
+			{
+				break;
+			}
+			this->layer->setammunition(this->layer->getammunition() + 45);
+			(*prop_itr)->state = PROPS_COLLECTED;
+			break;//一次收集一个
+		}
+
+		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*prop_itr)->type == BLOOD_BAG && (*prop_itr)->isColliding(hero))
+		{ 
+			//__String * propStr = __String::createWithFormat("%d", 1);
+			//hero->addCoinAmount(coinStr->getCString());
+			//(*coin_itr)->addCoinAmount(1);
+			if ((*prop_itr)->state == PROPS_COLLECTED)
+			{
+				break;
+			}
+			hero->propertymanager->setHP(hero->propertymanager->getHP() + 10);
+			(*prop_itr)->state = PROPS_COLLECTED;
+			break;//一次收集一个
+		}
+		++prop_itr;
 	}
 
 	if (hero->state != ROLE_FREE && hero->state != ROLE_DEAD)

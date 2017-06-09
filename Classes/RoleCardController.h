@@ -8,6 +8,7 @@
 #include "BaseRole.h"
 #include "BaseTrap.h"
 #include "Bullet.h"
+#include "Props.h"
 USING_NS_CC;
 
 
@@ -27,7 +28,7 @@ public:
 	std::vector<BaseRole *> monsterVec;
 	std::vector<BaseTrap *> trapVec;
 	std::vector<Coin *> coinVec;
-	std::vector<Coin *> collectedVec;
+	std::vector<Props *> propVec;
 	std::vector<Bullet *> bulletVec;
 	std::vector<Bullet *> enemyBulletVec;
 	BaseRole * getHero();

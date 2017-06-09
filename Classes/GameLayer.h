@@ -14,6 +14,7 @@
 #include "Coin.h"
 #include "ConditionLayer.h"
 #include "Bullet.h"
+#include "Props.h"
 USING_NS_CC;
 
 //typedef enum RoleFace
