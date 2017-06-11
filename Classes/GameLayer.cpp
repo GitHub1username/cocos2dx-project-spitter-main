@@ -14,8 +14,12 @@ GameLayer::~GameLayer()
 
 void GameLayer::onEnter()
 {
+<<<<<<< HEAD
 	Layer::onEnter();
 
+=======
+  
+>>>>>>> leonnnop/Map
 	auto listener = EventListenerKeyboard::create();
 
 	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
@@ -68,7 +72,11 @@ bool GameLayer::init()
 	pManager->setHP(100);
 	pManager->setArmatureName("New_Hero");
 	pManager->setDataName("New_Hero/New_Hero.ExportJson");
+<<<<<<< HEAD
 	pManager->setSPEED(2);//Ç°½øºóÍËËÙ¶ÈÓ¦¸Ã²»Ò»ÖÂ£¬ÓĞ´ıĞŞ¸Ä
+=======
+	pManager->setSPEED(2);//å‰è¿›åé€€é€Ÿåº¦åº”è¯¥ä¸ä¸€è‡´ï¼Œæœ‰å¾…ä¿®æ”¹
+>>>>>>> leonnnop/Map
 	pManager->setGetHitRect({ { -40,-40 },{ 80,80 } });
 	pManager->setHitRect({ { 40,-40 },{ 80,80 } });
 	pManager->setHitPoint(pManager->getHitRect().origin);
@@ -83,7 +91,11 @@ bool GameLayer::init()
 
 	this->addChild(hero, 1, 1);
 
+<<<<<<< HEAD
 	//È±ÉÙÒ»¸öÉú³ÉÀà£¬¸´ÖÆÕ³ÌùÊÇÊ²Ã´À±¼¦
+=======
+	//ç¼ºå°‘ä¸€ä¸ªç”Ÿæˆç±»ï¼Œå¤åˆ¶ç²˜è´´æ˜¯ä»€ä¹ˆè¾£é¸¡
+>>>>>>> leonnnop/Map
 
 	for (int i =0;i<2;i++)
 	{
@@ -93,7 +105,11 @@ bool GameLayer::init()
 		pManager2->setHP(100);
 		pManager2->setArmatureName("enemy");
 		pManager2->setDataName("enemy/enemy.ExportJson");
+<<<<<<< HEAD
 		pManager2->setSPEED(1);//Ç°½øºóÍËËÙ¶ÈÓ¦¸Ã²»Ò»ÖÂ£¬ÓĞ´ıĞŞ¸Ä
+=======
+		pManager2->setSPEED(1);//å‰è¿›åé€€é€Ÿåº¦åº”è¯¥ä¸ä¸€è‡´ï¼Œæœ‰å¾…ä¿®æ”¹
+>>>>>>> leonnnop/Map
 		pManager2->setGetHitRect({ { -40,-40 },{ 80,80 } });
 		pManager2->setHitRect({ { 40,-40 },{ 80,80 } });
 		pManager2->setHitPoint(pManager2->getHitRect().origin);
@@ -220,6 +236,21 @@ void GameLayer::update(float dt)
 		++itr3;
 	}
 
+	hero->propertymanager->setHP(hero->propertymanager->getHP() - 1.0/60);
+	//ä¸èµ¶ç´§èµ°å°±ä¼šæ­»å“¦~~
+
+	auto itr3 = RoleCardController::getInstance()->bulletVec.begin();
+	while (itr3 != RoleCardController::getInstance()->bulletVec.end())
+	{
+		if ((*itr3)->state == BULLET_FREE)
+		{
+			(*itr3)->purge();
+			RoleCardController::getInstance()->bulletVec.erase(itr3);
+			break;
+		}
+		++itr3;
+	}
+
 	auto itr = RoleCardController::getInstance()->monsterVec.begin();
 	while (itr != RoleCardController::getInstance()->monsterVec.end())
 	{
@@ -234,7 +265,7 @@ void GameLayer::update(float dt)
 	if (RoleCardController::getInstance()->monsterVec.size() == 0)
 	{
 		//this->purge();
-		//Ó®À²£¬Ó¦¸Ã×ªµ½Ê¤Àû½çÃæ£¬»òÏÂÒ»¹ØÊı¾İ¶ÁÈ¡½çÃæ¡£
+		//èµ¢å•¦ï¼Œåº”è¯¥è½¬åˆ°èƒœåˆ©ç•Œé¢ï¼Œæˆ–ä¸‹ä¸€å…³æ•°æ®è¯»å–ç•Œé¢ã€‚
 		return;
 	}
 
@@ -252,7 +283,7 @@ void GameLayer::update(float dt)
 	if (RoleCardController::getInstance()->heroVec.size() == 0)
 	{
 		//this->purge();
-		//ÊäÁË£¬×ªµ½³°·í½çÃæ2333
+		//è¾“äº†ï¼Œè½¬åˆ°å˜²è®½ç•Œé¢2333
 		return;
 	}
 
@@ -329,7 +360,11 @@ void GameLayer::update(float dt)
 			(*coin_itr)->purge();
 			RoleCardController::getInstance()->coinVec.erase(coin_itr);
 			continue;
+<<<<<<< HEAD
 			//Õâ¸öfreeµô£¬ºóÃæ¼ÌĞø
+=======
+			//è¿™ä¸ªfreeæ‰ï¼Œåé¢ç»§ç»­
+>>>>>>> leonnnop/Map
 		}
 
 		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*coin_itr)->isColliding(hero))
@@ -343,7 +378,11 @@ void GameLayer::update(float dt)
 			(*coin_itr)->addCoinAmount(1);
 			this->layer->setcoinNum(this->layer->getcoinNum() + 1);
 			(*coin_itr)->state = COIN_COLLECTED;
+<<<<<<< HEAD
 			break;//Ò»´ÎÊÕ¼¯Ò»¸ö
+=======
+			break;//ä¸€æ¬¡æ”¶é›†ä¸€ä¸ª
+>>>>>>> leonnnop/Map
 		}
 		++coin_itr;
 	}
@@ -356,7 +395,11 @@ void GameLayer::update(float dt)
 			(*prop_itr)->purge();
 			RoleCardController::getInstance()->propVec.erase(prop_itr);
 			continue;
+<<<<<<< HEAD
 			//Õâ¸öfreeµô£¬ºóÃæ¼ÌĞø
+=======
+			//è¿™ä¸ªfreeæ‰ï¼Œåé¢ç»§ç»­
+>>>>>>> leonnnop/Map
 		}
 
 		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*prop_itr)->type==SUPPLY_PACKAGE&&(*prop_itr)->isColliding(hero))
@@ -370,6 +413,7 @@ void GameLayer::update(float dt)
 			}
 			this->layer->setammunition(this->layer->getammunition() + 45);
 			(*prop_itr)->state = PROPS_COLLECTED;
+<<<<<<< HEAD
 			break;//Ò»´ÎÊÕ¼¯Ò»¸ö
 		}
 
@@ -386,6 +430,24 @@ void GameLayer::update(float dt)
 			(*prop_itr)->state = PROPS_COLLECTED;
 			break;//Ò»´ÎÊÕ¼¯Ò»¸ö
 		}
+=======
+			break;//ä¸€æ¬¡æ”¶é›†ä¸€ä¸ª
+		}
+
+		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*prop_itr)->type == BLOOD_BAG && (*prop_itr)->isColliding(hero))
+		{ 
+			//__String * propStr = __String::createWithFormat("%d", 1);
+			//hero->addCoinAmount(coinStr->getCString());
+			//(*coin_itr)->addCoinAmount(1);
+			if ((*prop_itr)->state == PROPS_COLLECTED)
+			{
+				break;
+			}
+			hero->propertymanager->setHP(hero->propertymanager->getHP() + 10);
+			(*prop_itr)->state = PROPS_COLLECTED;
+			break;//ä¸€æ¬¡æ”¶é›†ä¸€ä¸ª
+		}
+>>>>>>> leonnnop/Map
 		++prop_itr;
 	}
 
@@ -526,7 +588,11 @@ int GameLayer::keyPressedDurationAcion()
 	else if (isKeyPressed(upArrow))
 	{
 		return FACE_UP;
+<<<<<<< HEAD
 	}
+=======
+  }
+>>>>>>> leonnnop/Map
 	else if (isKeyPressed(downArrow))
 	{
 		return FACE_DOWN;
@@ -547,24 +613,30 @@ void GameLayer::setViewPointCenter(Point position)
 		- visibleSize.height / 2);
 
 
-	//ÆÁÄ»ÖĞĞÄµã
+	//å±å¹•ä¸­å¿ƒç‚¹
 	Point pointA = Point(visibleSize.width / 2, visibleSize.height / 2);
-	//Ê¹¾«Áé´¦ÓÚÆÁÄ»ÖĞĞÄ£¬ÒÆ¶¯µØÍ¼Ä¿±êÎ»ÖÃ
+	//ä½¿ç²¾çµå¤„äºå±å¹•ä¸­å¿ƒï¼Œç§»åŠ¨åœ°å›¾ç›®æ ‡ä½ç½®
 	Point pointB = Point(x, y);
+<<<<<<< HEAD
 	//log("Ä¿±êÎ»ÖÃ (%f ,%f) ", pointB.x, pointB.y);
 
+=======
+>>>>>>> leonnnop/Map
 
-	//µØÍ¼ÒÆ¶¯Æ«ÒÆÁ¿
+	//åœ°å›¾ç§»åŠ¨åç§»é‡
 	Point offset = pointA - pointB;
 
+<<<<<<< HEAD
 
 	//log("offset (%f ,%f) ", offset.x, offset.y);
+=======
+>>>>>>> leonnnop/Map
 	this->setPosition(offset);
 }
 
 void GameLayer::purge()
 {
-	//ÊÍ·Å»¹»î×ÅµÄ£¬·ÀÖ¹ÄÚ´æĞ¹Â©
+	//é‡Šæ”¾è¿˜æ´»ç€çš„ï¼Œé˜²æ­¢å†…å­˜æ³„æ¼
 	Director::getInstance()->getScheduler()->unschedule(schedule_selector(GameLayer::update), this);
 	RoleCardController::getInstance()->purge();
 	this->removeFromParent();
@@ -596,8 +668,11 @@ Point GameLayer::tileCoordForPosition(Point position)
 		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
 
 	}
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> leonnnop/Map
 	return Point(x, y);
 }
 
@@ -617,7 +692,11 @@ void GameLayer::setPlayerPosition(Point position)
 				//position.y -= 5;
 				hero->setPosition(position);
 				//hero->getBaseFSM()->changeToDefault();
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> leonnnop/Map
 				return;
 			}
 		}
