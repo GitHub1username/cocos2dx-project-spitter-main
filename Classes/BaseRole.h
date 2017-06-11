@@ -8,6 +8,7 @@
 #include "BaseFSM.h"
 #include "BaseAI.h"
 #include "TextSuperEffects.h"
+#include "Bullet.h"
 //#include "RoleCardController.h"
 USING_NS_CC;
 //using namespace CocosDenshion;
@@ -40,6 +41,7 @@ typedef enum RoleFace
 
 class BaseFSM;
 class BaseAI;
+class Bullet;
 //class RoleCardController;
 
 class BaseRole : public Node
@@ -56,7 +58,7 @@ public:
 	virtual void purge();
 	virtual void jump();
 	virtual void jumpEnd();
-	virtual void shoot(RoleType type);
+	Bullet * shoot(RoleType type);
 	void spriteMoveFinished(Object * pSender);
 	//当前角色是英雄或怪物，如果是英雄，只能射一段距离，如果是怪物可以射很远
 	//传入当前角色的类型，然后根据类型判断敌人是谁，然后遍历敌人数组
