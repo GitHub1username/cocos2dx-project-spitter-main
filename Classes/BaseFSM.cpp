@@ -49,6 +49,7 @@ void BaseFSM::changeToDefault(int i)
 	if (role->state != ROLE_DEFAULT && role->state != ROLE_DEAD && role->state != ROLE_FREE)
 	{
 		role->state = ROLE_DEFAULT;
+		role->changeFaceDirection(FACE_DOWN);
 		role->getArmature()->getAnimation()->play("default");
 		if (role->type == TYPE_MONSTER_APC)
 		{

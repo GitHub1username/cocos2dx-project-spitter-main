@@ -39,7 +39,7 @@ bool BaseRole::init(propertyManager * manager)
 	propertymanager = manager;
 
 	state = ROLE_DEFAULT;
-	face = FACE_LEFT;
+	//face = FACE_DOWN;
 	this->setcoinAmount(0);
 
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(propertymanager->getDataName());
@@ -225,26 +225,48 @@ Rect BaseRole::getRealRect(BaseRole * role, Rect rect)
 
 void BaseRole::changeFaceDirection(RoleFace face)
 {
+	//if (face == FACE_LEFT)
+	//{
+	//	armature->setScaleX(1);
+	//	propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x - propertymanager->getHitRect().size.width, propertymanager->getHitRect().origin.y,propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//} 
+	//else if(face == FACE_RIGHT)
+	//{
+	//	armature->setScaleX(-1);
+	//	propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitPoint().y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//}
+	//else if (face == FACE_UP)
+	//{
+	//	propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x, propertymanager->getHitPoint().y + propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//}
+	//else if (face == FACE_DOWN)
+	//{
+	//	propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x, propertymanager->getGetHitPoint().y - propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//}
 	if (face == FACE_LEFT)
 	{
 		armature->setScaleX(1);
-		propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x - propertymanager->getHitRect().size.width, propertymanager->getHitRect().origin.y,propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(-120,-40, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
-	} 
-	else if(face == FACE_RIGHT)
+	}
+	else if (face == FACE_RIGHT)
 	{
 		armature->setScaleX(-1);
-		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(40,-40, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}
 	else if (face == FACE_UP)
 	{
-		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(-40,40, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}
 	else if (face == FACE_DOWN)
 	{
-		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(-40,-120, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}
 }

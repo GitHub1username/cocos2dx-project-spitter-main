@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _COIN_
+#define _COIN_
+
 #include <iostream>
 #include <cocos2d.h>
 #include <BaseRole.h>
@@ -35,4 +38,6 @@ public:
 	virtual bool isColliding(BaseRole * role);
 	CC_SYNTHESIZE(Armature *, armature, Armature);
 };
+
+#endif
 

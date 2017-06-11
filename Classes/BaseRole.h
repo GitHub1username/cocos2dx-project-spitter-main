@@ -9,6 +9,8 @@
 #include "BaseAI.h"
 #include "TextSuperEffects.h"
 #include "Bullet.h"
+//#include "GameLayer.h"
+
 //#include "RoleCardController.h"
 USING_NS_CC;
 //using namespace CocosDenshion;
