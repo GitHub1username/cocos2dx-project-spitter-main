@@ -50,6 +50,10 @@ void BaseFSM::changeToDefault(int i)
 	{
 		role->state = ROLE_DEFAULT;
 		role->getArmature()->getAnimation()->play("default");
+		if (role->type == TYPE_MONSTER_APC)
+		{
+			role->unschedule(schedule_selector(BaseFSM::update));
+		}
 	} 
 }
 
@@ -69,6 +73,11 @@ void BaseFSM::changeToAttack()
 	{
 		role->state = ROLE_ATTACK;
 		role->getArmature()->getAnimation()->play("attack",-1,0);
+		if (role->type == TYPE_MONSTER_APC)
+		{
+			//是个远程APC
+			role->schedule(schedule_selector(BaseFSM::update), 1.0f); //每隔1.0f执行一次
+		}
 	}
 }
 
@@ -102,7 +111,7 @@ void BaseFSM::changeToLeft()
 		role->state = ROLE_MOVE;
 	}
 
-	if (role->face == FACE_RIGHT)
+	if (role->face != FACE_LEFT)
 	{
 		role->changeFaceDirection(FACE_LEFT);
 	}
@@ -129,7 +138,7 @@ void BaseFSM::changeToRight()
 		role->state = ROLE_MOVE;
 	}
 
-	if (role->face == FACE_LEFT)
+	if (role->face != FACE_RIGHT)
 	{
 		role->changeFaceDirection(FACE_RIGHT);
 	}
@@ -143,6 +152,62 @@ void BaseFSM::changeToRight()
 	}
 	
 	role->setPosition(Vec2(role->getPositionX() + role->propertymanager->getSPEED(), role->getPositionY()));
+}
+
+void BaseFSM::changeToUp()
+{
+	if (role->state == ROLE_ATTACK || role->state == ROLE_JUMP)
+	{
+		return;
+	}
+
+	if (role->state != ROLE_MOVE && role->state != ROLE_DEAD)
+	{
+		role->state = ROLE_MOVE;
+	}
+
+	if (role->face != FACE_UP)
+	{
+		role->changeFaceDirection(FACE_UP);
+	}
+
+	std::string movement = role->getArmature()->getAnimation()->getCurrentMovementID();
+	char * nowMovement = const_cast<char *>(movement.c_str());
+
+	if (strcmp(nowMovement, "run_up"))//if the current movement is not running back ,play it.
+	{
+		role->getArmature()->getAnimation()->play("run_up");
+	}
+
+	role->setPosition(Vec2(role->getPositionX() , role->getPositionY() + role->propertymanager->getSPEED()));
+}
+
+void BaseFSM::changeToDown()
+{
+	if (role->state == ROLE_ATTACK || role->state == ROLE_JUMP)
+	{
+		return;
+	}
+
+	if (role->state != ROLE_MOVE && role->state != ROLE_DEAD)
+	{
+		role->state = ROLE_MOVE;
+	}
+
+	if (role->face != FACE_DOWN)
+	{
+		role->changeFaceDirection(FACE_DOWN);
+	}
+
+	std::string movement = role->getArmature()->getAnimation()->getCurrentMovementID();
+	char * nowMovement = const_cast<char *>(movement.c_str());
+
+	if (strcmp(nowMovement, "run_down"))//if the current movement is not running back ,play it.
+	{
+		role->getArmature()->getAnimation()->play("run_down");
+	}
+
+	role->setPosition(Vec2(role->getPositionX(), role->getPositionY() - role->propertymanager->getSPEED()));
 }
 
 void BaseFSM::switchMoveState(int state)
@@ -180,11 +245,19 @@ void BaseFSM::switchActionState(int state)
 	case FACE_RIGHT:
 		this->changeToRight();
 		break;
-	case ROLE_JUMP:
-		this->changeToJump();
+	case FACE_DOWN:
+		this->changeToDown();
+		break;
+	case FACE_UP:
+		this->changeToUp();
 		break;
 	default:
 		role->getArmature()->stopAllActions();
 		break;
 	}
+}
+
+void BaseFSM::update(float ft)
+{
+	role->shoot(role->type);
 }

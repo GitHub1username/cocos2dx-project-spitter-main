@@ -13,6 +13,8 @@
 #include "BaseTrap.h"
 #include "Coin.h"
 #include "ConditionLayer.h"
+#include "Bullet.h"
+#include "Props.h"
 USING_NS_CC;
 
 //typedef enum RoleFace
@@ -44,10 +46,10 @@ public:
 	void setPlayerPosition(Point position);
 public:
 	BaseRole * hero;
-	BaseRole * monster;
-	BaseRole * monster2;
-	BaseTrap * trap;
-	Coin * coin;
+	//BaseRole * monster;
+	//BaseRole * monster2;
+	//BaseTrap * trap;
+	//Coin * coin;
 	SceneManager * tsm;
 	ConditionLayer * layer;
 	cocos2d::TMXTiledMap * _tileMap;

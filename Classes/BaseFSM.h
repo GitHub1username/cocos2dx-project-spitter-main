@@ -25,10 +25,14 @@ public:
 	void changeToJump();
 	void changeToLeft();
 	void changeToRight();
+	void changeToUp();
+	void changeToDown();
 	//void changeToEnemy();
 	void switchMoveState(int state);
 	void switchActionState(int state);
 
+public:
+	void update(float ft);
 public:
 	BaseRole * role;
 };
