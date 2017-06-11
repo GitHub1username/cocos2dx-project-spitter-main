@@ -34,11 +34,11 @@ bool Props::init(propertyManager * manager, BaseRole * hero)
 	//this->addChild("res/mushroom.png");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(propertymanager->getDataName());
 	armature = Armature::create(propertymanager->getArmatureName());
-	armature->getAnimation()->play("default");
+	armature->getAnimation()->play("supply");
 
 	this->addChild(armature);
 
-	//armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Props::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Props::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 	return true;
 }
@@ -90,7 +90,7 @@ void Props::animationEvent(Armature * pArmature, MovementEventType movmentType, 
 {
 	const char * movementID = movementIDstr.c_str();
 
-	if (!strcmp(movementID, "default"))
+	if (!strcmp(movementID, "supply"))
 	{
 		if (this->state == PROPS_COLLECTED)
 		{
