@@ -35,17 +35,23 @@ bool Props::init(propertyManager * manager, BaseRole * hero)
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(propertymanager->getDataName());
 	armature = Armature::create(propertymanager->getArmatureName());
 <<<<<<< HEAD
+<<<<<<< HEAD
 	armature->getAnimation()->play("default");
 
 	this->addChild(armature);
 
 	//armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Props::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 =======
+=======
+>>>>>>> leonnnop/Map
 	armature->getAnimation()->play("supply");
 
 	this->addChild(armature);
 
 	armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Props::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+<<<<<<< HEAD
+>>>>>>> leonnnop/Map
+=======
 >>>>>>> leonnnop/Map
 
 	return true;
@@ -99,7 +105,11 @@ void Props::animationEvent(Armature * pArmature, MovementEventType movmentType, 
 	const char * movementID = movementIDstr.c_str();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!strcmp(movementID, "default"))
+=======
+	if (!strcmp(movementID, "supply"))
+>>>>>>> leonnnop/Map
 =======
 	if (!strcmp(movementID, "supply"))
 >>>>>>> leonnnop/Map

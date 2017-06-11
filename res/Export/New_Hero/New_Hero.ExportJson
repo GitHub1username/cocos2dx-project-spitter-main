@@ -10,7 +10,11 @@
           "name": "Layer3",
           "parent": "",
 <<<<<<< HEAD
+<<<<<<< HEAD
           "dI": 20,
+=======
+          "dI": 24,
+>>>>>>> leonnnop/Map
 =======
           "dI": 24,
 >>>>>>> leonnnop/Map
@@ -334,7 +338,10 @@
                 }
               ]
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> leonnnop/Map
             },
             {
               "name": "run_right1.png",
@@ -405,6 +412,9 @@
                   "kY": 0.0
                 }
               ]
+<<<<<<< HEAD
+>>>>>>> leonnnop/Map
+=======
 >>>>>>> leonnnop/Map
             }
           ]
@@ -418,7 +428,11 @@
       "mov_data": [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "name": "default",
+=======
+          "name": "attack",
+>>>>>>> leonnnop/Map
 =======
           "name": "attack",
 >>>>>>> leonnnop/Map
@@ -435,7 +449,11 @@
               "frame_data": [
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 0,
+=======
+                  "dI": 4,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 4,
 >>>>>>> leonnnop/Map
@@ -454,7 +472,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 1,
+=======
+                  "dI": 5,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 5,
 >>>>>>> leonnnop/Map
@@ -473,7 +495,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 2,
+=======
+                  "dI": 6,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 6,
 >>>>>>> leonnnop/Map
@@ -492,7 +518,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 3,
+=======
+                  "dI": 7,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 7,
 >>>>>>> leonnnop/Map
@@ -515,8 +545,13 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "name": "attack",
           "dr": 16,
+=======
+          "name": "run_up",
+          "dr": 12,
+>>>>>>> leonnnop/Map
 =======
           "name": "run_up",
           "dr": 12,
@@ -526,7 +561,11 @@
           "drTW": 0,
           "twE": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
           "sc": 0.75,
+=======
+          "sc": 0.5,
+>>>>>>> leonnnop/Map
 =======
           "sc": 0.5,
 >>>>>>> leonnnop/Map
@@ -537,7 +576,11 @@
               "frame_data": [
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 4,
+=======
+                  "dI": 14,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 14,
 >>>>>>> leonnnop/Map
@@ -556,7 +599,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 5,
+=======
+                  "dI": 15,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 15,
 >>>>>>> leonnnop/Map
@@ -575,8 +622,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 6,
 =======
+=======
+>>>>>>> leonnnop/Map
                   "dI": 15,
                   "x": 0.0,
                   "y": 0.0,
@@ -593,6 +643,9 @@
                 },
                 {
                   "dI": 16,
+<<<<<<< HEAD
+>>>>>>> leonnnop/Map
+=======
 >>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
@@ -609,7 +662,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 7,
+=======
+                  "dI": 16,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 16,
 >>>>>>> leonnnop/Map
@@ -621,7 +678,11 @@
                   "kX": 0.0,
                   "kY": 0.0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "fi": 15,
+=======
+                  "fi": 11,
+>>>>>>> leonnnop/Map
 =======
                   "fi": 11,
 >>>>>>> leonnnop/Map
@@ -636,8 +697,13 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "name": "run",
           "dr": 26,
+=======
+          "name": "run_down",
+          "dr": 21,
+>>>>>>> leonnnop/Map
 =======
           "name": "run_down",
           "dr": 21,
@@ -654,7 +720,11 @@
               "frame_data": [
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 8,
+=======
+                  "dI": 17,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 17,
 >>>>>>> leonnnop/Map
@@ -673,7 +743,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 9,
+=======
+                  "dI": 18,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 18,
 >>>>>>> leonnnop/Map
@@ -692,7 +766,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 10,
+=======
+                  "dI": 19,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 19,
 >>>>>>> leonnnop/Map
@@ -711,7 +789,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 11,
+=======
+                  "dI": 20,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 20,
 >>>>>>> leonnnop/Map
@@ -730,7 +812,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 12,
+=======
+                  "dI": 21,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 21,
 >>>>>>> leonnnop/Map
@@ -746,6 +832,7 @@
                   "tweenFrame": true,
                   "bd_src": 1,
                   "bd_dst": 771
+<<<<<<< HEAD
 <<<<<<< HEAD
                 },
                 {
@@ -764,6 +851,8 @@
                   "bd_dst": 771
 =======
 >>>>>>> leonnnop/Map
+=======
+>>>>>>> leonnnop/Map
                 }
               ]
             }
@@ -771,8 +860,13 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "name": "run_up",
           "dr": 12,
+=======
+          "name": "run",
+          "dr": 21,
+>>>>>>> leonnnop/Map
 =======
           "name": "run",
           "dr": 21,
@@ -782,7 +876,11 @@
           "drTW": 0,
           "twE": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
           "sc": 0.5,
+=======
+          "sc": 0.8333333,
+>>>>>>> leonnnop/Map
 =======
           "sc": 0.8333333,
 >>>>>>> leonnnop/Map
@@ -793,7 +891,11 @@
               "frame_data": [
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 14,
+=======
+                  "dI": 22,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 22,
 >>>>>>> leonnnop/Map
@@ -812,7 +914,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 15,
+=======
+                  "dI": 23,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 23,
 >>>>>>> leonnnop/Map
@@ -831,7 +937,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 15,
+=======
+                  "dI": 24,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 24,
 >>>>>>> leonnnop/Map
@@ -843,7 +953,11 @@
                   "kX": 0.0,
                   "kY": 0.0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "fi": 9,
+=======
+                  "fi": 10,
+>>>>>>> leonnnop/Map
 =======
                   "fi": 10,
 >>>>>>> leonnnop/Map
@@ -854,7 +968,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 16,
+=======
+                  "dI": 25,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 25,
 >>>>>>> leonnnop/Map
@@ -866,7 +984,11 @@
                   "kX": 0.0,
                   "kY": 0.0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "fi": 10,
+=======
+                  "fi": 15,
+>>>>>>> leonnnop/Map
 =======
                   "fi": 15,
 >>>>>>> leonnnop/Map
@@ -877,7 +999,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 16,
+=======
+                  "dI": 26,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 26,
 >>>>>>> leonnnop/Map
@@ -889,7 +1015,11 @@
                   "kX": 0.0,
                   "kY": 0.0,
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "fi": 11,
+=======
+                  "fi": 20,
+>>>>>>> leonnnop/Map
 =======
                   "fi": 20,
 >>>>>>> leonnnop/Map
@@ -904,8 +1034,13 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "name": "run_down",
           "dr": 21,
+=======
+          "name": "default",
+          "dr": 8,
+>>>>>>> leonnnop/Map
 =======
           "name": "default",
           "dr": 8,
@@ -915,7 +1050,11 @@
           "drTW": 0,
           "twE": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
           "sc": 0.75,
+=======
+          "sc": 0.233333334,
+>>>>>>> leonnnop/Map
 =======
           "sc": 0.233333334,
 >>>>>>> leonnnop/Map
@@ -926,7 +1065,11 @@
               "frame_data": [
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 17,
+=======
+                  "dI": 24,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 24,
 >>>>>>> leonnnop/Map
@@ -945,7 +1088,11 @@
                 },
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   "dI": 18,
+=======
+                  "dI": 25,
+>>>>>>> leonnnop/Map
 =======
                   "dI": 25,
 >>>>>>> leonnnop/Map
@@ -963,6 +1110,7 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
 <<<<<<< HEAD
                   "dI": 19,
                   "x": 0.0,
@@ -983,6 +1131,9 @@
 =======
                   "dI": 25,
 >>>>>>> leonnnop/Map
+=======
+                  "dI": 25,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -990,6 +1141,7 @@
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
+<<<<<<< HEAD
 <<<<<<< HEAD
                   "fi": 15,
                   "twE": 0,
@@ -1010,6 +1162,9 @@
 =======
                   "fi": 7,
 >>>>>>> leonnnop/Map
+=======
+                  "fi": 7,
+>>>>>>> leonnnop/Map
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -1026,8 +1181,13 @@
     {
       "name": "default1",
 <<<<<<< HEAD
+<<<<<<< HEAD
       "width": 0.0,
       "height": 0.0,
+=======
+      "width": 56.0,
+      "height": 57.0,
+>>>>>>> leonnnop/Map
 =======
       "width": 56.0,
       "height": 57.0,
@@ -1204,7 +1364,10 @@
       "pY": 0.5,
       "plistFile": ""
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> leonnnop/Map
     },
     {
       "name": "run_right1",
@@ -1245,6 +1408,9 @@
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
+<<<<<<< HEAD
+>>>>>>> leonnnop/Map
+=======
 >>>>>>> leonnnop/Map
     }
   ],
