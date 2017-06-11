@@ -51,11 +51,7 @@ bool ConditionLayer::init()
 	this->addChild(menu);
 
 	progressView = ProgressView::create();
-<<<<<<< HEAD
-	progressView->setPosition(ccp(200, 450));
-=======
 	progressView->setPosition(ccp(270, 450));
->>>>>>> leonnnop/master
 	progressView->setScale(3.2f);
 	progressView->setScaleX(6.4f);
 

@@ -30,17 +30,6 @@ bool Bullet::init(BaseRole * hero , propertyManager * manager)
 {
 	this->hero = hero;
 	this->manager = manager;
-<<<<<<< HEAD
-	type = hero->type;
-	//this->addChild("res/mushroom.png");
-	ArmatureDataManager::getInstance()->addArmatureFileInfo(manager->getDataName());
-	armature = Armature::create(manager->getArmatureName());
-	armature->getAnimation()->play("coin");
-
-	this->addChild(armature);
-
-	armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Bullet::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-=======
 	this->state = BULLET_DEFAULT;
 	type = hero->type;
 	//this->addChild("res/mushroom.png");
@@ -53,7 +42,6 @@ bool Bullet::init(BaseRole * hero , propertyManager * manager)
 	this->addChild(armature2);
 
 //	armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Bullet::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
->>>>>>> leonnnop/master
 
 	return true;
 }
@@ -95,24 +83,7 @@ Rect Bullet::getRealRect(Bullet * bullet, Rect rect)
 	return Rect(rect.origin.x + bullet->getPositionX(), rect.origin.y + bullet->getPositionY(), rect.size.width, rect.size.height);
 }
 
-<<<<<<< HEAD
-void Bullet::animationEvent(Armature * pArmature, MovementEventType movmentType, const std::string & movementIDstr)
-{
-	const char * movementID = movementIDstr.c_str();
-
-	if (!strcmp(movementID, "coin"))
-	{
-		if (this->state == BULLET_COLLIDED)
-		{
-			armature->runAction(Sequence::create(FadeOut::create(.1f), CallFunc::create([=]() {state = BULLET_FREE; }), NULL));
-		}
-	}
-}
-
-bool Bullet::isColliding(BaseRole * role, RoleType type)
-=======
 bool Bullet::isColliding(BaseRole * role)
->>>>>>> leonnnop/master
 {
 	return getRealRect(this, this->manager->getHitRect()).intersectsRect(role->getRealRect(role, role->propertymanager->getGetHitRect()));
 }

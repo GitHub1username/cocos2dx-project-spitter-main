@@ -2,13 +2,10 @@
 #include "cocos2d.h"
 #include <iostream>
 #include "BaseRole.h"
-<<<<<<< HEAD
-=======
 #include "cocostudio/CocoStudio.h"
 //#include "CocoStudio.h"
 USING_NS_CC;
 using namespace cocostudio;
->>>>>>> leonnnop/master
 
 typedef enum BulletState
 {
@@ -22,22 +19,15 @@ typedef enum BulletState
 //	TYPE_HERO = 1,
 //	TYPE_MONSTER = 2,
 //}RoleType;
-<<<<<<< HEAD
-=======
 enum RoleType;
 //class BaseRole;
->>>>>>> leonnnop/master
 class Bullet : public Node
 {
 public:
 	Bullet();
 	virtual ~Bullet();
 public:
-<<<<<<< HEAD
-	Bullet * create(BaseRole * hero,propertyManager * manager);
-=======
 	static Bullet * create(BaseRole * hero,propertyManager * manager);
->>>>>>> leonnnop/master
 	bool init(BaseRole * hero,propertyManager * manager);
 	void purge();
 public:
@@ -50,17 +40,10 @@ public:
 	virtual void onDraw(const cocos2d::Mat4& transform, uint32_t flags);
 	cocos2d::CustomCommand _customCommand;
 	virtual Rect getRealRect(Bullet * bullet, Rect rect);
-<<<<<<< HEAD
-	virtual void animationEvent(Armature * pArmature, MovementEventType movmentType, const std::string & movementIDstr);
-public:
-	virtual bool isColliding(BaseRole * role,RoleType type);
-	CC_SYNTHESIZE(Armature *, armature, Armature);
-=======
 //	virtual void animationEvent(Armature * pArmature, MovementEventType movmentType, const std::string & movementIDstr);
 public:
 	virtual bool isColliding(BaseRole * role);
 	//传入子弹射的敌人，与当前敌人的种类（怪物或英雄）
 	CC_SYNTHESIZE(Armature *, armature2, Armature);
->>>>>>> leonnnop/master
 };
 

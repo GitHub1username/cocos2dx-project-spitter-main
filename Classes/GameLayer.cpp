@@ -13,7 +13,6 @@ GameLayer::~GameLayer()
 }
 
 void GameLayer::onEnter()
-<<<<<<< HEAD
 {
 	Layer::onEnter();
 
@@ -62,62 +61,7 @@ bool GameLayer::init()
 
 	this->scheduleUpdate();
 	//Director::getInstance()->getScheduler()->schedule(schedule_selector(ControlLayer::update), this, (float)1 / 60, false);
-/*
-=======
-{
-	Layer::onEnter();
 
->>>>>>> leonnnop/master
-	auto listener = EventListenerKeyboard::create();
-
-	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		keys[keyCode] = true;
-	};
-
-	listener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		keys[keyCode] = false;
-	};
-
-	auto listener2 = EventListenerTouchOneByOne::create();
-	listener2->setSwallowTouches(true);
-
-	listener2->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event* event)
-	{
-		return true;
-	};
-	listener2->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this);
-
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-<<<<<<< HEAD
-*/
-=======
-
-}
-
-bool GameLayer::init()
-{
-	
-	_tileMap = TMXTiledMap::create("TileMap.tmx");
-	_tileMap->setPosition(ccp(0, 0));
-
-	addChild(_tileMap, -1);
-
-	TMXObjectGroup* group = _tileMap->getObjectGroup("Objects");
-	ValueMap spawnPoint = group->getObject("SpawnPoint");
-
-	_meta = _tileMap->getLayer("Meta");
-	_meta->setVisible(true);
-
-	float x = spawnPoint["x"].asFloat();
-	float y = spawnPoint["y"].asFloat();
-	log("%f %f", x, y);
-	this->onEnter();
-
-	this->scheduleUpdate();
-	//Director::getInstance()->getScheduler()->schedule(schedule_selector(ControlLayer::update), this, (float)1 / 60, false);
-
->>>>>>> leonnnop/master
 	propertyManager * pManager = propertyManager::create();
 	pManager->setID(1);
 	pManager->setATK(50);
@@ -141,49 +85,6 @@ bool GameLayer::init()
 
 	//缺少一个生成类，复制粘贴是什么辣鸡
 
-<<<<<<< HEAD
-	propertyManager * pManager2 = propertyManager::create();
-	pManager2->setID(2);
-	pManager2->setATK(10);
-	pManager2->setHP(100);
-	pManager2->setArmatureName("enemy");
-	pManager2->setDataName("enemy/enemy.ExportJson");
-	pManager2->setSPEED(1);//前进后退速度应该不一致，有待修改
-	pManager2->setGetHitRect({ { -40,-40 },{ 80,80 } });
-	pManager2->setHitRect({ { 40,-40 },{ 80,80 } });
-	pManager2->setHitPoint(pManager2->getHitRect().origin);
-	pManager2->setGetHitPoint(pManager2->getGetHitRect().origin);
-	pManager2->setATKLimit(100);
-	pManager2->setLockLimit(200);
-	pManager2->retain();
-
-	monster = BaseRole::creatWithProperty(pManager2);
-	monster->setPosition(Vec2(600, 200));
-	monster->type = static_cast<RoleType>(2);
-
-	this->addChild(monster, 1, 1);
-
-	propertyManager * pManager3 = propertyManager::create();
-	pManager3->setID(3);
-	pManager3->setATK(10);
-	pManager3->setHP(100);
-	pManager3->setArmatureName("hero");
-	pManager3->setDataName("hero/hero.ExportJson");
-	pManager3->setSPEED(1);//前进后退速度应该不一致，有待修改
-	pManager3->setGetHitRect({ { -40,-40 },{ 80,80 } });
-	pManager3->setHitRect({ { 40,-40 },{ 80,80 } });
-	pManager3->setHitPoint(pManager3->getHitRect().origin);
-	pManager3->setGetHitPoint(pManager3->getGetHitRect().origin);
-	pManager3->setATKLimit(100);
-	pManager3->setLockLimit(200);
-	pManager3->retain();
-
-	monster2 = BaseRole::creatWithProperty(pManager3);
-	monster2->setPosition(Vec2(400, 200));
-	monster2->type = static_cast<RoleType>(2);
-
-	this->addChild(monster2, 1, 1);
-=======
 	for (int i =0;i<2;i++)
 	{
 		propertyManager * pManager2 = propertyManager::create();
@@ -220,7 +121,6 @@ bool GameLayer::init()
 
 		RoleCardController::getInstance()->monsterVec.push_back(monster);
 	}
->>>>>>> leonnnop/master
 
 	propertyManager * pManager4 = propertyManager::create();
 	pManager4->setHitRect({ { -40,-40 },{ 80,80 } });
@@ -305,8 +205,6 @@ void GameLayer::update(float dt)
 
 	layer->progressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
 
-<<<<<<< HEAD
-=======
 	hero->propertymanager->setHP(hero->propertymanager->getHP() - 1.0/60);
 	//不赶紧走就会死哦~~
 
@@ -321,7 +219,6 @@ void GameLayer::update(float dt)
 		}
 		++itr3;
 	}
->>>>>>> leonnnop/master
 
 	auto itr = RoleCardController::getInstance()->monsterVec.begin();
 	while (itr != RoleCardController::getInstance()->monsterVec.end())
@@ -572,59 +469,6 @@ void GameLayer::spriteMoveFinished(Object * pSender)
 
 }
 
-void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
-{
-	log("touch");
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-
-	//auto touchPoint = touch->getLocation();
-	//log("%f %f", touchPoint.x, touchPoint.y);
-	//touchPoint = _tileMap-> convertToWorldSpace(touchPoint);
-	//touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
-
-	auto projectile = Sprite::create("Projectile.png", Rect(0, 0, 20, 20));
-	projectile->setPosition(hero->getPosition());
-
-	// Determine offset of location to projectile
-	//int offX = touchPoint.x - projectile->getPosition().x;
-	//int offY = touchPoint.y - projectile->getPosition().y;
-	//log("%f %f", touchPoint.x, touchPoint.y);
-	//log("%f %f", projectile->getPosition().x, projectile->getPosition().y);
-
-	// Bail out if we are shooting down or backwards
-	//if (offX <= 0) return;
-
-	// Ok to add now - we've double checked position
-	this->addChild(projectile);
-
-	//auto point = CCDirector::sharedDirector()->convertToGL(projectile->getPosition());
-	//log("%f %f", point.x, point.y);
-	// Determine where we wish to shoot the projectile to
-	//int realX = visibleSize.width + (projectile->getContentSize().width / 2);
-	//float ratio = -(float)offY / (float)offX;
-	//int realY = ((realX - point.x) * ratio) + point.y;
-	auto realDest = Point(projectile->getPositionX()+100, projectile->getPositionY());
-
-	// Determine the length of how far we're shooting
-	//int offRealX = realX - point.x;
-	//int offRealY = realY - point.y;
-	//float length = sqrtf((offRealX*offRealX) + (offRealY*offRealY));
-	//float velocity = 960 / 1; 	// 960pixels/1sec
-	//float realMoveDuration = length / velocity;
-
-	// Move projectile to actual endpoint
-	projectile->runAction(
-		Sequence::create(MoveTo::create(.5f, realDest),
-			CallFuncN::create(CC_CALLBACK_1(GameLayer::spriteMoveFinished, this)),
-			NULL));
-}
-
-void GameLayer::spriteMoveFinished(Object * pSender)
-{
-	Sprite * sprite = (Sprite *) pSender;
-	this->removeChild(sprite);
-}
-
 bool GameLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 {
 	if (keys[keyCode])
@@ -729,18 +573,6 @@ void GameLayer::purge()
 Point GameLayer::tileCoordForPosition(Point position)
 {
 	int x;
-<<<<<<< HEAD
-	if (hero->face == FACE_RIGHT)
-	{
-		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
-	}
-	else
-	{
-		x = static_cast<int>((position.x - 40) / _tileMap->getTileSize().width);
-	}
-	
-	int y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40)/ _tileMap->getTileSize().height);
-=======
 	int y;
 	if (hero->face == FACE_RIGHT)
 	{
@@ -766,7 +598,6 @@ Point GameLayer::tileCoordForPosition(Point position)
 	}
 	
 	
->>>>>>> leonnnop/master
 	return Point(x, y);
 }
 
