@@ -9,7 +9,11 @@
         {
           "name": "Layer3",
           "parent": "",
+<<<<<<< HEAD
           "dI": 20,
+=======
+          "dI": 24,
+>>>>>>> leonnnop/Map
           "x": 0.0,
           "y": 0.0,
           "z": 1,
@@ -329,6 +333,79 @@
                   "kY": 0.0
                 }
               ]
+<<<<<<< HEAD
+=======
+            },
+            {
+              "name": "run_right1.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "run_right2.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "run_right3.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "run_right4.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            },
+            {
+              "name": "run_right5.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+>>>>>>> leonnnop/Map
             }
           ]
         }
@@ -340,7 +417,11 @@
       "name": "New_Hero",
       "mov_data": [
         {
+<<<<<<< HEAD
           "name": "default",
+=======
+          "name": "attack",
+>>>>>>> leonnnop/Map
           "dr": 16,
           "lp": true,
           "to": 0,
@@ -353,7 +434,11 @@
               "dl": 0.0,
               "frame_data": [
                 {
+<<<<<<< HEAD
                   "dI": 0,
+=======
+                  "dI": 4,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -368,7 +453,11 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
                   "dI": 1,
+=======
+                  "dI": 5,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -383,7 +472,11 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
                   "dI": 2,
+=======
+                  "dI": 6,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -398,7 +491,11 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
                   "dI": 3,
+=======
+                  "dI": 7,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -417,204 +514,33 @@
           ]
         },
         {
+<<<<<<< HEAD
           "name": "attack",
           "dr": 16,
-          "lp": true,
-          "to": 0,
-          "drTW": 0,
-          "twE": 0,
-          "sc": 0.75,
-          "mov_bone_data": [
-            {
-              "name": "Layer3",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 4,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 5,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 5,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 6,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 10,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 7,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 15,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "run",
-          "dr": 26,
-          "lp": true,
-          "to": 0,
-          "drTW": 0,
-          "twE": 0,
-          "sc": 0.75,
-          "mov_bone_data": [
-            {
-              "name": "Layer3",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 8,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 9,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 5,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 10,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 10,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 11,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 15,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 12,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 20,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 13,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 25,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            }
-          ]
-        },
-        {
+=======
           "name": "run_up",
           "dr": 12,
+>>>>>>> leonnnop/Map
           "lp": true,
           "to": 0,
           "drTW": 0,
           "twE": 0,
+<<<<<<< HEAD
+          "sc": 0.75,
+=======
           "sc": 0.5,
+>>>>>>> leonnnop/Map
           "mov_bone_data": [
             {
               "name": "Layer3",
               "dl": 0.0,
               "frame_data": [
                 {
+<<<<<<< HEAD
+                  "dI": 4,
+=======
                   "dI": 14,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -629,7 +555,11 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
+                  "dI": 5,
+=======
                   "dI": 15,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -644,6 +574,9 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
+                  "dI": 6,
+=======
                   "dI": 15,
                   "x": 0.0,
                   "y": 0.0,
@@ -660,6 +593,7 @@
                 },
                 {
                   "dI": 16,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -674,7 +608,11 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
+                  "dI": 7,
+=======
                   "dI": 16,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -682,7 +620,11 @@
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
+<<<<<<< HEAD
+                  "fi": 15,
+=======
                   "fi": 11,
+>>>>>>> leonnnop/Map
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -693,8 +635,13 @@
           ]
         },
         {
+<<<<<<< HEAD
+          "name": "run",
+          "dr": 26,
+=======
           "name": "run_down",
           "dr": 21,
+>>>>>>> leonnnop/Map
           "lp": true,
           "to": 0,
           "drTW": 0,
@@ -706,7 +653,11 @@
               "dl": 0.0,
               "frame_data": [
                 {
+<<<<<<< HEAD
+                  "dI": 8,
+=======
                   "dI": 17,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -721,7 +672,11 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
+                  "dI": 9,
+=======
                   "dI": 18,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -736,6 +691,279 @@
                   "bd_dst": 771
                 },
                 {
+<<<<<<< HEAD
+                  "dI": 10,
+=======
+                  "dI": 19,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 10,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
+                  "dI": 11,
+=======
+                  "dI": 20,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 15,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
+                  "dI": 12,
+=======
+                  "dI": 21,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+<<<<<<< HEAD
+                },
+                {
+                  "dI": 13,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 25,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+=======
+>>>>>>> leonnnop/Map
+                }
+              ]
+            }
+          ]
+        },
+        {
+<<<<<<< HEAD
+          "name": "run_up",
+          "dr": 12,
+=======
+          "name": "run",
+          "dr": 21,
+>>>>>>> leonnnop/Map
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+<<<<<<< HEAD
+          "sc": 0.5,
+=======
+          "sc": 0.8333333,
+>>>>>>> leonnnop/Map
+          "mov_bone_data": [
+            {
+              "name": "Layer3",
+              "dl": 0.0,
+              "frame_data": [
+                {
+<<<<<<< HEAD
+                  "dI": 14,
+=======
+                  "dI": 22,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
+                  "dI": 15,
+=======
+                  "dI": 23,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
+                  "dI": 15,
+=======
+                  "dI": 24,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+<<<<<<< HEAD
+                  "fi": 9,
+=======
+                  "fi": 10,
+>>>>>>> leonnnop/Map
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
+                  "dI": 16,
+=======
+                  "dI": 25,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+<<<<<<< HEAD
+                  "fi": 10,
+=======
+                  "fi": 15,
+>>>>>>> leonnnop/Map
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
+                  "dI": 16,
+=======
+                  "dI": 26,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+<<<<<<< HEAD
+                  "fi": 11,
+=======
+                  "fi": 20,
+>>>>>>> leonnnop/Map
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+<<<<<<< HEAD
+          "name": "run_down",
+          "dr": 21,
+=======
+          "name": "default",
+          "dr": 8,
+>>>>>>> leonnnop/Map
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+<<<<<<< HEAD
+          "sc": 0.75,
+=======
+          "sc": 0.233333334,
+>>>>>>> leonnnop/Map
+          "mov_bone_data": [
+            {
+              "name": "Layer3",
+              "dl": 0.0,
+              "frame_data": [
+                {
+<<<<<<< HEAD
+                  "dI": 17,
+=======
+                  "dI": 24,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
+                  "dI": 18,
+=======
+                  "dI": 25,
+>>>>>>> leonnnop/Map
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 5,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+<<<<<<< HEAD
                   "dI": 19,
                   "x": 0.0,
                   "y": 0.0,
@@ -752,6 +980,9 @@
                 },
                 {
                   "dI": 20,
+=======
+                  "dI": 25,
+>>>>>>> leonnnop/Map
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0,
@@ -759,6 +990,7 @@
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
+<<<<<<< HEAD
                   "fi": 15,
                   "twE": 0,
                   "tweenFrame": true,
@@ -775,6 +1007,9 @@
                   "kX": 0.0,
                   "kY": 0.0,
                   "fi": 20,
+=======
+                  "fi": 7,
+>>>>>>> leonnnop/Map
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -790,8 +1025,13 @@
   "texture_data": [
     {
       "name": "default1",
+<<<<<<< HEAD
       "width": 0.0,
       "height": 0.0,
+=======
+      "width": 56.0,
+      "height": 57.0,
+>>>>>>> leonnnop/Map
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
@@ -963,6 +1203,49 @@
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
+<<<<<<< HEAD
+=======
+    },
+    {
+      "name": "run_right1",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "run_right2",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "run_right3",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "run_right4",
+      "width": 64.0,
+      "height": 57.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "run_right5",
+      "width": 0.0,
+      "height": 0.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+>>>>>>> leonnnop/Map
     }
   ],
   "config_file_path": [
