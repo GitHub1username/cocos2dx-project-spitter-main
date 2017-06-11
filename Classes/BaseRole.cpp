@@ -39,7 +39,7 @@ bool BaseRole::init(propertyManager * manager)
 	propertymanager = manager;
 
 	state = ROLE_DEFAULT;
-	face = FACE_RIGHT;
+	face = FACE_LEFT;
 	this->setcoinAmount(0);
 
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(propertymanager->getDataName());
@@ -97,16 +97,6 @@ void BaseRole::jump()
 {
 	//CCActionInterval* jumpActions = nullptr;
 	/*创建动作，2s，原地跳跃(即落地的地点相对于起跳地点x偏移0，y偏移0)，高度250，弹跳次数1*/
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-	CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(0, 0), 64, 1);
-	/*callFunc也是一个动作，作用是调用一个函数*/
-	CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(BaseRole::jumpEnd));
-	/*组合动作*/
-	CCActionInterval* jumpActions = CCSequence::create(jump, callFunc, NULL);
-=======
->>>>>>> leonnnop/Map
 	//if (this->face == FACE_RIGHT)
 	//{
 		CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(64.0, 0), 64, 1);
@@ -125,10 +115,6 @@ void BaseRole::jump()
 	//	CCActionInterval* jumpActions = CCSequence::create(jump, callFunc, NULL);
 	//	jumpActions->setTag(233);
 	//}
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/master
->>>>>>> leonnnop/Map
 
 	runAction(jumpActions);
 }
