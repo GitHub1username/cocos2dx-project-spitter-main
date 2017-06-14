@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="10">
  <tileset firstgid="1" name="瓦片地图图块" tilewidth="32" tileheight="32" tilecount="1089" columns="33">
   <image source="瓦片地图图块.png" width="1056" height="1056"/>
  </tileset>
- <layer name="块层 1" width="50" height="50">
+ <layer name="Base" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztlsEOgCAMQ/X/f9qjF4br2hHUNuFCStnTsOw8xjpfuCKOrBAvq9Fd5qh7WZmjlt2lCkdXT2B7UJSJ1MB6O+4zR91rjrlP8Z47M7KZu35jRObI7bNeJNMcz/usF8lk+0eUgZ5X3BVxMOr47lGuOWr3KfRnDnQuYLzMXKP6Hyv7rjlq2Qpv9rw51niz5yscHX1s57kkUlQHU4M56jLHPFMxPyjeaZYDnWMQsX0X5RjtmeO5jqzXHPfelziYXoPWlj2PCP0f5qjlIufNMd/fhUPxzhX9IzvXKPpuVMOqXHPU7uvK/RpH14rq6FgX3KUCDQ==
+   eJztlkEOxDAIA9P/f3qPewkptiGKUlvqBTkO06qIZ4zxXPLMFNVVr6rZXebgvarMwWV3ieHomgnqDIoykR5Ub8d95uC95lj7Kv7nzoxs5qnvGJE5cnXVi2Sa472uepFMdX5EGej5irsiDkUd7z3KNQd3X4W+zIHuBYpX2WuqvsfOuWsOLrvCmz1vjj3e7HmGo2OOnbyXRIr6UHowBy9zrDMr9oeK/zTLge4xiNS5i3LMauZ47yPrNce/dhOHMmvQ3rLnEaHfwxxcLnLeHOv6KRwV/3nF/MjuNRVzN+phV645uPu6cm/juOH5AaG8Ahc=
   </data>
  </layer>
- <objectgroup name="objects"/>
+ <layer name="Meta" width="50" height="50" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJztljEOxSAMQzv0Lr3/Df/YhdA4dhDi21KXyJg8KiKe+7qeQ76RojrrZTXayxx1Lytz1LK7VOHomgnsDEI4FP12ZYx85qh5zTH3Ke5zZ0Y2c9czRmSOXJ31Ipnm+K6zXiSTnR9RBrpesVfEwajj3KNcc9T2U+ifOdB3AeNl3jWq/7Fy7pqjlq3wZtebY403u77C0THHdn6XRIr6YHowR13mmGcq3g+Ke4owI7MGETt3UY5RzRzffWS95nhrJ3EwswbtLbseEfo/zFHLRdabY17fhUNxzxXzI/uuUczdqIdVueao7deVexrHCd8PushZsw==
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="1" name="SpawnPoint" x="63" y="64" width="96" height="96"/>
+  <object id="3" name="supply1" x="256" y="1312" width="64" height="64"/>
+  <object id="4" name="supply2" x="1151" y="257" width="64" height="64"/>
+  <object id="6" name="coin" x="288" y="64" width="64" height="64"/>
+  <object id="7" name="monster" x="608" y="96" width="96" height="96">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="8" name="monster" x="1439" y="417" width="96" height="96">
+   <properties>
+    <property name="monster_type" value="monster2"/>
+   </properties>
+  </object>
+  <object id="9" name="trap" x="831" y="1088" width="64" height="96"/>
+ </objectgroup>
 </map>
