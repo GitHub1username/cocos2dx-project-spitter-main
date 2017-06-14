@@ -39,7 +39,9 @@ bool BaseRole::init(propertyManager * manager)
 	propertymanager = manager;
 
 	state = ROLE_DEFAULT;
-	face = FACE_LEFT;
+
+	//face = FACE_DOWN;
+
 	this->setcoinAmount(0);
 
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(propertymanager->getDataName());
@@ -96,22 +98,22 @@ void BaseRole::purge()
 void BaseRole::jump()
 {
 	//CCActionInterval* jumpActions = nullptr;
-	/*´´½¨¶¯×÷£¬2s£¬Ô­µØÌøÔ¾(¼´ÂäµØµÄµØµãÏà¶ÔÓÚÆðÌøµØµãxÆ«ÒÆ0£¬yÆ«ÒÆ0)£¬¸ß¶È250£¬µ¯Ìø´ÎÊý1*/
+	/*åˆ›å»ºåŠ¨ä½œï¼Œ2sï¼ŒåŽŸåœ°è·³è·ƒ(å³è½åœ°çš„åœ°ç‚¹ç›¸å¯¹äºŽèµ·è·³åœ°ç‚¹xåç§»0ï¼Œyåç§»0)ï¼Œé«˜åº¦250ï¼Œå¼¹è·³æ¬¡æ•°1*/
 	//if (this->face == FACE_RIGHT)
 	//{
 		CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(64.0, 0), 64, 1);
-		/*callFuncÒ²ÊÇÒ»¸ö¶¯×÷£¬×÷ÓÃÊÇµ÷ÓÃÒ»¸öº¯Êý*/
+		/*callFuncä¹Ÿæ˜¯ä¸€ä¸ªåŠ¨ä½œï¼Œä½œç”¨æ˜¯è°ƒç”¨ä¸€ä¸ªå‡½æ•°*/
 		CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(BaseRole::jumpEnd));
-		/*×éºÏ¶¯×÷*/
+		/*ç»„åˆåŠ¨ä½œ*/
 		CCActionInterval* jumpActions = CCSequence::create(jump, callFunc, NULL);
 		jumpActions->setTag(233);
 	//}
 	//else
 	//{
 	//	CCJumpBy* jump = CCJumpBy::create(1.5f, ccp(-64.0, 0), 64, 1);
-	//	/*callFuncÒ²ÊÇÒ»¸ö¶¯×÷£¬×÷ÓÃÊÇµ÷ÓÃÒ»¸öº¯Êý*/
+	//	/*callFuncä¹Ÿæ˜¯ä¸€ä¸ªåŠ¨ä½œï¼Œä½œç”¨æ˜¯è°ƒç”¨ä¸€ä¸ªå‡½æ•°*/
 	//	CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(BaseRole::jumpEnd));
-	//	/*×éºÏ¶¯×÷*/
+	//	/*ç»„åˆåŠ¨ä½œ*/
 	//	CCActionInterval* jumpActions = CCSequence::create(jump, callFunc, NULL);
 	//	jumpActions->setTag(233);
 	//}
@@ -225,26 +227,48 @@ Rect BaseRole::getRealRect(BaseRole * role, Rect rect)
 
 void BaseRole::changeFaceDirection(RoleFace face)
 {
+	//if (face == FACE_LEFT)
+	//{
+	//	armature->setScaleX(1);
+	//	propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x - propertymanager->getHitRect().size.width, propertymanager->getHitRect().origin.y,propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//} 
+	//else if(face == FACE_RIGHT)
+	//{
+	//	armature->setScaleX(-1);
+	//	propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitPoint().y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//}
+	//else if (face == FACE_UP)
+	//{
+	//	propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x, propertymanager->getHitPoint().y + propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//}
+	//else if (face == FACE_DOWN)
+	//{
+	//	propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x, propertymanager->getGetHitPoint().y - propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+	//	this->face = face;
+	//}
 	if (face == FACE_LEFT)
 	{
 		armature->setScaleX(1);
-		propertymanager->setHitRect(Rect(-propertymanager->getHitPoint().x - propertymanager->getHitRect().size.width, propertymanager->getHitRect().origin.y,propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(-120,-40, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
-	} 
-	else if(face == FACE_RIGHT)
+	}
+	else if (face == FACE_RIGHT)
 	{
 		armature->setScaleX(-1);
-		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(40,-40, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}
 	else if (face == FACE_UP)
 	{
-		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(-40,40, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}
 	else if (face == FACE_DOWN)
 	{
-		propertymanager->setHitRect(Rect(propertymanager->getHitPoint().x, propertymanager->getHitRect().origin.y, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
+		propertymanager->setHitRect(Rect(-40,-120, propertymanager->getHitRect().size.width, propertymanager->getHitRect().size.width));
 		this->face = face;
 	}
 }

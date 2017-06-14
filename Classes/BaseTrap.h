@@ -1,4 +1,8 @@
 #pragma once
+#ifndef _BASE_TRAP_
+#define _BASE_TRAP_
+
+
 #include "cocos2d.h"
 #include "propertyManager.h"
 #include "BaseRole.h"
@@ -23,7 +27,8 @@ public:
 	BaseRole * currentPlayer;
 public:
 	virtual bool isColliding(BaseRole * role);
-	CC_SYNTHESIZE(Armature *, armature, Armature);
+	CC_SYNTHESIZE(Armature * , armature, Armature);
 };
+#endif // !1
 
 

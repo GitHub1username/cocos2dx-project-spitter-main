@@ -82,6 +82,14 @@ void BaseAI::updateFunc(float dt)
 		{
 			baseRole->changeFaceDirection(FACE_RIGHT);
 		}
+		else if (roleVec[roleID]->getPositionX() == baseRole->getPositionX()&& roleVec[roleID]->getPositionY() > baseRole->getPositionY())
+		{
+			baseRole->changeFaceDirection(FACE_UP);
+		}
+		else if (roleVec[roleID]->getPositionX() == baseRole->getPositionX() && roleVec[roleID]->getPositionY() < baseRole->getPositionY())
+		{
+			baseRole->changeFaceDirection(FACE_DOWN);
+		}
 		else
 		{
 			baseRole->changeFaceDirection(FACE_LEFT);
@@ -107,6 +115,8 @@ void BaseAI::updateFunc(float dt)
 			}
 			else
 			{
+				Point playerPos = baseRole->getPosition();
+
 				if (baseRole->face == FACE_LEFT && baseRole->state != ROLE_ATTACK)
 				{
 					baseRole->getBaseFSM()->changeToLeft();
@@ -115,6 +125,15 @@ void BaseAI::updateFunc(float dt)
 				{
 					baseRole->getBaseFSM()->changeToRight();
 				}
+				else if (baseRole->face == FACE_UP && baseRole->state != ROLE_ATTACK)
+				{
+					baseRole->getBaseFSM()->changeToUp();
+				}
+				else if (baseRole->face == FACE_DOWN && baseRole->state != ROLE_ATTACK)
+				{
+					baseRole->getBaseFSM()->changeToDown();
+				}
+				setPlayerPosition(baseRole, playerPos);
 			}
 		}
 		else
@@ -129,4 +148,58 @@ void BaseAI::purge()
 	stopRoleAI();
 	baseRole = nullptr;
 	CC_SAFE_RELEASE(this);
+}
+
+Point BaseAI::tileCoordForPosition(BaseRole * role, Point position)
+{
+	int x;
+	int y;
+	if (role->face == FACE_RIGHT)
+	{
+		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
+	}
+	else if (role->face == FACE_LEFT)
+	{
+		x = static_cast<int>((position.x - 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
+	}
+	else if (role->face == FACE_UP)
+	{
+		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) - 40) / _tileMap->getTileSize().height);
+
+	}
+	else if (role->face == FACE_DOWN)
+	{
+		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
+		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
+
+	}
+
+	return Point(x, y);
+}
+
+void BaseAI::setPlayerPosition(BaseRole * role, Point position)
+{
+	Point tileCoord = this->tileCoordForPosition(role, role->getPosition());
+	int tileGid = _meta->getTileGIDAt(tileCoord);
+	if (tileGid)
+	{
+		auto properties = _tileMap->getPropertiesForGID(tileGid).asValueMap();
+		if (!properties.empty())
+		{
+			auto collision = properties["Collidable"].asString();
+			if ("True" == collision)
+			{
+				role->stopActionByTag(233);
+				//position.y -= 5;
+				role->setPosition(position);
+				//hero->getBaseFSM()->changeToDefault();
+
+				return;
+			}
+		}
+	}
+	//hero->setPosition(position);
 }

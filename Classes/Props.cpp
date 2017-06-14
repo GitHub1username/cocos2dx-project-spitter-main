@@ -30,29 +30,15 @@ bool Props::init(propertyManager * manager, BaseRole * hero)
 {
 	this->hero = hero;
 	this->propertymanager = manager;
-	//状态没有初始化，状态没有初始化，状态没有初始化
+	//鐘舵�佹病鏈夊垵濮嬪寲锛岀姸鎬佹病鏈夊垵濮嬪寲锛岀姸鎬佹病鏈夊垵濮嬪寲
 	//this->addChild("res/mushroom.png");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(propertymanager->getDataName());
 	armature = Armature::create(propertymanager->getArmatureName());
-<<<<<<< HEAD
-<<<<<<< HEAD
-	armature->getAnimation()->play("default");
-
-	this->addChild(armature);
-
-	//armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Props::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-=======
-=======
->>>>>>> leonnnop/Map
 	armature->getAnimation()->play("supply");
 
 	this->addChild(armature);
 
 	armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Props::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-<<<<<<< HEAD
->>>>>>> leonnnop/Map
-=======
->>>>>>> leonnnop/Map
 
 	return true;
 }
@@ -104,15 +90,9 @@ void Props::animationEvent(Armature * pArmature, MovementEventType movmentType, 
 {
 	const char * movementID = movementIDstr.c_str();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	if (!strcmp(movementID, "default"))
-=======
+
 	if (!strcmp(movementID, "supply"))
->>>>>>> leonnnop/Map
-=======
-	if (!strcmp(movementID, "supply"))
->>>>>>> leonnnop/Map
+
 	{
 		if (this->state == PROPS_COLLECTED)
 		{

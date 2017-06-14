@@ -43,20 +43,20 @@ void GameLayer::onEnter()
 bool GameLayer::init()
 {
 	
-	_tileMap = TMXTiledMap::create("TileMap.tmx");
+	_tileMap = TMXTiledMap::create("map.tmx");
 	_tileMap->setPosition(ccp(0, 0));
 
 	addChild(_tileMap, -1);
 
-	TMXObjectGroup* group = _tileMap->getObjectGroup("Objects");
-	ValueMap spawnPoint = group->getObject("SpawnPoint");
-
+	//TMXObjectGroup* group = _tileMap->getObjectGroup("Objects");
+	//ValueMap spawnPoint = group->getObject("SpawnPoint");
+	
 	_meta = _tileMap->getLayer("Meta");
 	_meta->setVisible(true);
 
-	float x = spawnPoint["x"].asFloat();
+	/*float x = spawnPoint["x"].asFloat();
 	float y = spawnPoint["y"].asFloat();
-	log("%f %f", x, y);
+	log("%f %f", x, y);*/
 	this->onEnter();
 
 	this->scheduleUpdate();
@@ -65,10 +65,10 @@ bool GameLayer::init()
 	propertyManager * pManager = propertyManager::create();
 	pManager->setID(1);
 	pManager->setATK(50);
-	pManager->setHP(100);
+	pManager->setHP(100000);//
 	pManager->setArmatureName("New_Hero");
 	pManager->setDataName("New_Hero/New_Hero.ExportJson");
-	pManager->setSPEED(2);//Ç°½øºóÍËËÙ¶ÈÓ¦¸Ã²»Ò»ÖÂ£¬ÓĞ´ıĞŞ¸Ä
+	pManager->setSPEED(2);//å‰è¿›åé€€é€Ÿåº¦åº”è¯¥ä¸ä¸€è‡´ï¼Œæœ‰å¾…ä¿®æ”¹
 	pManager->setGetHitRect({ { -40,-40 },{ 80,80 } });
 	pManager->setHitRect({ { 40,-40 },{ 80,80 } });
 	pManager->setHitPoint(pManager->getHitRect().origin);
@@ -78,12 +78,17 @@ bool GameLayer::init()
 	pManager->retain();
 
 	hero = BaseRole::creatWithProperty(pManager);
-	hero->setPosition(Vec2(x, y));
+	hero->setPosition(Vec2(300, 300));
 	hero->type = static_cast<RoleType>(1);
+
+	BaseFSM * basefsm = BaseFSM::createFSM(hero);
+	basefsm->retain();
+	hero->setBaseFSM(basefsm);
+	hero->getBaseFSM()->changeToDown();
 
 	this->addChild(hero, 1, 1);
 
-	//È±ÉÙÒ»¸öÉú³ÉÀà£¬¸´ÖÆÕ³ÌùÊÇÊ²Ã´À±¼¦
+	//ç¼ºå°‘ä¸€ä¸ªç”Ÿæˆç±»ï¼Œå¤åˆ¶ç²˜è´´æ˜¯ä»€ä¹ˆè¾£é¸¡
 
 	for (int i =0;i<2;i++)
 	{
@@ -93,7 +98,7 @@ bool GameLayer::init()
 		pManager2->setHP(100);
 		pManager2->setArmatureName("enemy");
 		pManager2->setDataName("enemy/enemy.ExportJson");
-		pManager2->setSPEED(1);//Ç°½øºóÍËËÙ¶ÈÓ¦¸Ã²»Ò»ÖÂ£¬ÓĞ´ıĞŞ¸Ä
+		pManager2->setSPEED(1);//å‰è¿›åé€€é€Ÿåº¦åº”è¯¥ä¸ä¸€è‡´ï¼Œæœ‰å¾…ä¿®æ”¹
 		pManager2->setGetHitRect({ { -40,-40 },{ 80,80 } });
 		pManager2->setHitRect({ { 40,-40 },{ 80,80 } });
 		pManager2->setHitPoint(pManager2->getHitRect().origin);
@@ -112,8 +117,12 @@ bool GameLayer::init()
 		BaseFSM * basefsm2 = BaseFSM::createFSM(monster);
 		basefsm2->retain();
 		monster->setBaseFSM(basefsm2);
+		monster->getBaseFSM()->changeToDown();
 
 		BaseAI * ai = BaseAI::creatAI(monster);
+		//ai->layer = this;
+		ai->_tileMap = _tileMap;
+		ai->_meta = _meta;
 		ai->retain();
 		monster->setBaseAI(ai);
 
@@ -181,14 +190,10 @@ bool GameLayer::init()
 	RoleCardController::getInstance()->coinVec.push_back(coin);
 	RoleCardController::getInstance()->retain();
 
-	BaseFSM * basefsm = BaseFSM::createFSM(hero);
-	basefsm->retain();
-	hero->setBaseFSM(basefsm);
-
 	auto winSize = Director::getInstance()->getWinSize();
 	auto bg_pic = Sprite::create("res/Map/background.jpg");
 	bg_pic->setPosition(Point(winSize.width / 2, winSize.height / 2));
-	this->addChild(bg_pic);
+	this->addChild(bg_pic,-2);
 	
 	return true;
 }
@@ -206,7 +211,7 @@ void GameLayer::update(float dt)
 	layer->progressView->setCurrentProgress((float)(hero->propertymanager->getHP()));
 
 	hero->propertymanager->setHP(hero->propertymanager->getHP() - 1.0/60);
-	//²»¸Ï½ô×ß¾Í»áËÀÅ¶~~
+	//ä¸èµ¶ç´§èµ°å°±ä¼šæ­»å“¦~~
 
 	auto itr3 = RoleCardController::getInstance()->bulletVec.begin();
 	while (itr3 != RoleCardController::getInstance()->bulletVec.end())
@@ -229,12 +234,16 @@ void GameLayer::update(float dt)
 			RoleCardController::getInstance()->monsterVec.erase(itr);
 			break;
 		}
+		//else if ((*itr)->state != ROLE_DEAD)
+		//{
+		//	this->setPlayerPosition((*itr), (*itr)->getPosition());
+		//}
 		++itr;
 	}
 	if (RoleCardController::getInstance()->monsterVec.size() == 0)
 	{
 		//this->purge();
-		//Ó®À²£¬Ó¦¸Ã×ªµ½Ê¤Àû½çÃæ£¬»òÏÂÒ»¹ØÊı¾İ¶ÁÈ¡½çÃæ¡£
+		//èµ¢å•¦ï¼Œåº”è¯¥è½¬åˆ°èƒœåˆ©ç•Œé¢ï¼Œæˆ–ä¸‹ä¸€å…³æ•°æ®è¯»å–ç•Œé¢ã€‚
 		return;
 	}
 
@@ -252,7 +261,7 @@ void GameLayer::update(float dt)
 	if (RoleCardController::getInstance()->heroVec.size() == 0)
 	{
 		//this->purge();
-		//ÊäÁË£¬×ªµ½³°·í½çÃæ2333
+		//è¾“äº†ï¼Œè½¬åˆ°å˜²è®½ç•Œé¢2333
 		return;
 	}
 
@@ -327,9 +336,9 @@ void GameLayer::update(float dt)
 		if ((*coin_itr)->state == COIN_FREE)
 		{
 			(*coin_itr)->purge();
-			RoleCardController::getInstance()->coinVec.erase(coin_itr);
+			coin_itr = RoleCardController::getInstance()->coinVec.erase(coin_itr);
 			continue;
-			//Õâ¸öfreeµô£¬ºóÃæ¼ÌĞø
+			//è¿™ä¸ªfreeæ‰ï¼Œåé¢ç»§ç»­
 		}
 
 		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*coin_itr)->isColliding(hero))
@@ -343,7 +352,7 @@ void GameLayer::update(float dt)
 			(*coin_itr)->addCoinAmount(1);
 			this->layer->setcoinNum(this->layer->getcoinNum() + 1);
 			(*coin_itr)->state = COIN_COLLECTED;
-			break;//Ò»´ÎÊÕ¼¯Ò»¸ö
+			break;//ä¸€æ¬¡æ”¶é›†ä¸€ä¸ª
 		}
 		++coin_itr;
 	}
@@ -354,9 +363,9 @@ void GameLayer::update(float dt)
 		if ((*prop_itr)->state == PROPS_FREE)
 		{
 			(*prop_itr)->purge();
-			RoleCardController::getInstance()->propVec.erase(prop_itr);
+			prop_itr = RoleCardController::getInstance()->propVec.erase(prop_itr);
 			continue;
-			//Õâ¸öfreeµô£¬ºóÃæ¼ÌĞø
+			//è¿™ä¸ªfreeæ‰ï¼Œåé¢ç»§ç»­
 		}
 
 		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*prop_itr)->type==SUPPLY_PACKAGE&&(*prop_itr)->isColliding(hero))
@@ -370,7 +379,7 @@ void GameLayer::update(float dt)
 			}
 			this->layer->setammunition(this->layer->getammunition() + 45);
 			(*prop_itr)->state = PROPS_COLLECTED;
-			break;//Ò»´ÎÊÕ¼¯Ò»¸ö
+			break;//ä¸€æ¬¡æ”¶é›†ä¸€ä¸ª
 		}
 
 		if (hero->state != ROLE_DEAD&&hero->state != ROLE_FREE && (*prop_itr)->type == BLOOD_BAG && (*prop_itr)->isColliding(hero))
@@ -384,7 +393,7 @@ void GameLayer::update(float dt)
 			}
 			hero->propertymanager->setHP(hero->propertymanager->getHP() + 10);
 			(*prop_itr)->state = PROPS_COLLECTED;
-			break;//Ò»´ÎÊÕ¼¯Ò»¸ö
+			break;//ä¸€æ¬¡æ”¶é›†ä¸€ä¸ª
 		}
 		++prop_itr;
 	}
@@ -393,7 +402,7 @@ void GameLayer::update(float dt)
 	{
 		auto playerPos = hero->getPosition();
 		hero->getBaseFSM()->switchActionState(keyPressedDurationAcion());
-		this->setPlayerPosition(playerPos);
+		this->setPlayerPosition(hero,playerPos);
 	}
 
 	this->setViewPointCenter(hero->getPosition());
@@ -412,7 +421,7 @@ void GameLayer::update(float dt)
 void GameLayer::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	log("touch");
-	if (this->layer->getammunition()==0)
+	if (this->layer->getammunition()==0||hero->state == ROLE_FREE||hero->state == ROLE_DEAD)
 	{
 		return;
 	}
@@ -547,14 +556,14 @@ void GameLayer::setViewPointCenter(Point position)
 		- visibleSize.height / 2);
 
 
-	//ÆÁÄ»ÖĞĞÄµã
+	//å±å¹•ä¸­å¿ƒç‚¹
 	Point pointA = Point(visibleSize.width / 2, visibleSize.height / 2);
-	//Ê¹¾«Áé´¦ÓÚÆÁÄ»ÖĞĞÄ£¬ÒÆ¶¯µØÍ¼Ä¿±êÎ»ÖÃ
+	//ä½¿ç²¾çµå¤„äºå±å¹•ä¸­å¿ƒï¼Œç§»åŠ¨åœ°å›¾ç›®æ ‡ä½ç½®
 	Point pointB = Point(x, y);
-	//log("Ä¿±êÎ»ÖÃ (%f ,%f) ", pointB.x, pointB.y);
+	//log("ç›®æ ‡ä½ç½® (%f ,%f) ", pointB.x, pointB.y);
 
-
-	//µØÍ¼ÒÆ¶¯Æ«ÒÆÁ¿
+  
+	//åœ°å›¾ç§»åŠ¨åç§»é‡
 	Point offset = pointA - pointB;
 
 
@@ -564,33 +573,33 @@ void GameLayer::setViewPointCenter(Point position)
 
 void GameLayer::purge()
 {
-	//ÊÍ·Å»¹»î×ÅµÄ£¬·ÀÖ¹ÄÚ´æĞ¹Â©
+	//é‡Šæ”¾è¿˜æ´»ç€çš„ï¼Œé˜²æ­¢å†…å­˜æ³„æ¼
 	Director::getInstance()->getScheduler()->unschedule(schedule_selector(GameLayer::update), this);
 	RoleCardController::getInstance()->purge();
 	this->removeFromParent();
 }
 
-Point GameLayer::tileCoordForPosition(Point position)
+Point GameLayer::tileCoordForPosition(BaseRole * role,Point position)
 {
 	int x;
 	int y;
-	if (hero->face == FACE_RIGHT)
+	if (role->face == FACE_RIGHT)
 	{
 		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
 		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
 	}
-	else if(hero->face == FACE_LEFT)
+	else if(role->face == FACE_LEFT)
 	{
 		x = static_cast<int>((position.x - 40) / _tileMap->getTileSize().width);
 		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
 	}
-	else if (hero->face == FACE_UP)
+	else if (role->face == FACE_UP)
 	{
 		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
 		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) - 40) / _tileMap->getTileSize().height);
 
 	}
-	else if (hero->face == FACE_DOWN)
+	else if (role->face == FACE_DOWN)
 	{
 		x = static_cast<int>((position.x + 40) / _tileMap->getTileSize().width);
 		y = static_cast<int>((((_tileMap->getMapSize().height * _tileMap->getTileSize().height) - position.y) + 40) / _tileMap->getTileSize().height);
@@ -601,9 +610,9 @@ Point GameLayer::tileCoordForPosition(Point position)
 	return Point(x, y);
 }
 
-void GameLayer::setPlayerPosition(Point position)
+void GameLayer::setPlayerPosition(BaseRole * role ,Point position)
 {
-	Point tileCoord = this->tileCoordForPosition(hero->getPosition());
+	Point tileCoord = this->tileCoordForPosition(role,role->getPosition());
 	int tileGid = _meta->getTileGIDAt(tileCoord);
 	if (tileGid) 
 	{
@@ -613,9 +622,9 @@ void GameLayer::setPlayerPosition(Point position)
 			auto collision = properties["Collidable"].asString();
 			if ("True" == collision) 
 			{
-				hero->stopActionByTag(233);
+				role->stopActionByTag(233);
 				//position.y -= 5;
-				hero->setPosition(position);
+				role->setPosition(position);
 				//hero->getBaseFSM()->changeToDefault();
 
 				return;

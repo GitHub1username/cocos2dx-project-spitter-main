@@ -23,6 +23,7 @@ USING_NS_CC;
 //	FACE_RIGHT,
 //}RoleFace;
 class ConditionLayer;
+//class BaseAI;
 class GameLayer : public Layer
 {
 	
@@ -42,8 +43,8 @@ public:
 	void setViewPointCenter(Point position);
 public:
 	void purge();
-	Point tileCoordForPosition(Point position);
-	void setPlayerPosition(Point position);
+	Point tileCoordForPosition(BaseRole * role,Point position);
+	void setPlayerPosition(BaseRole * role,Point position);
 public:
 	BaseRole * hero;
 	//BaseRole * monster;

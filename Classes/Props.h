@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _PROPS_
+#define _PROPS_
+
 #include <iostream>
 #include <cocos2d.h>
 #include <BaseRole.h>
@@ -45,3 +48,4 @@ public:
 	CC_SYNTHESIZE(Armature *, armature, Armature);
 };
 
+#endif
