@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="10">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="31">
  <tileset firstgid="1" name="瓦片地图图块" tilewidth="32" tileheight="32" tilecount="1089" columns="33">
   <image source="瓦片地图图块.png" width="1056" height="1056"/>
  </tileset>
@@ -15,19 +15,71 @@
  </layer>
  <objectgroup name="Objects">
   <object id="1" name="SpawnPoint" x="63" y="64" width="96" height="96"/>
-  <object id="3" name="supply1" x="256" y="1312" width="64" height="64"/>
-  <object id="4" name="supply2" x="1151" y="257" width="64" height="64"/>
-  <object id="6" name="coin" x="288" y="64" width="64" height="64"/>
-  <object id="7" name="monster" x="608" y="96" width="96" height="96">
+  <object id="3" name="supply1" x="256" y="1312" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply1"/>
+   </properties>
+  </object>
+  <object id="4" name="supply3" x="1151" y="257" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply1"/>
+   </properties>
+  </object>
+  <object id="6" name="coin6" x="288" y="64" width="64" height="64"/>
+  <object id="7" name="monster5" x="608" y="96" width="64" height="64">
    <properties>
     <property name="monster_type" value="monster1"/>
    </properties>
   </object>
-  <object id="8" name="monster" x="1439" y="417" width="96" height="96">
+  <object id="8" name="monster6" x="1056" y="415" width="64" height="64">
    <properties>
     <property name="monster_type" value="monster2"/>
    </properties>
   </object>
   <object id="9" name="trap" x="831" y="1088" width="64" height="96"/>
+  <object id="10" name="coin1" x="256" y="256" width="64" height="64"/>
+  <object id="12" name="monster1" x="63" y="415" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="14" name="monster2" x="447" y="1120.58" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster2"/>
+   </properties>
+  </object>
+  <object id="15" name="coin2" x="958" y="1312" width="64" height="64"/>
+  <object id="16" name="monster3" x="1312" y="798" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="17" name="coin3" x="767" y="606" width="64" height="64"/>
+  <object id="19" name="coin4" x="800" y="958" width="64" height="64"/>
+  <object id="20" name="monster4" x="447" y="798" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster2"/>
+   </properties>
+  </object>
+  <object id="21" name="coin5" x="254" y="608" width="64" height="64"/>
+  <object id="23" name="supply2" x="432.503" y="447" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply2"/>
+   </properties>
+  </object>
+  <object id="24" name="coin7" x="1473" y="65" width="64" height="64"/>
+  <object id="25" name="coin8" x="1473" y="1122" width="64" height="64"/>
+  <object id="26" name="supply4" x="1135.5" y="960" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply2"/>
+   </properties>
+  </object>
+  <object id="27" name="monster7" x="960" y="1473" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="29" name="coin9" x="766" y="1473" width="64" height="64"/>
+  <object id="30" name="coin10" x="1471" y="1471" width="64" height="64"/>
  </objectgroup>
 </map>
