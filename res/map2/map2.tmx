@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="29">
+ <tileset firstgid="1" name="瓦片地图图块" tilewidth="32" tileheight="32" tilecount="1089" columns="33">
+  <image source="map/瓦片地图图块.png" width="1056" height="1056"/>
+  <tile id="1062">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Base" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztlsEOwzAIQ9P//+kdJ01NZ2w32agt5RIFyCslcIwxjibrU2d7Z0LPOTW7bzjCoajKwdYRaju7I1vPyrd355L1Fw4trttfN44dvVGp/dkZJIb65rD+KjGRGLv+PzRmOOY+nf7QmCvuh/Zpda3gYPyjCoe+x5y5su3EgdRLpX5ZW8W/e45gbR0zhOsuim04nsHh7Kts/70jH6ic+a2+fU6FAzvzDxzOnsrW5DefjFbl4+43Oxx6HOUcYvdEDrX+lVmAnQ1QZkU78+FUOPC9ThxqfSF1j+yxqs4w7F3CgfsPx5o+WOm7rNzvGqtwvO1/Qd04OqwXyxkCNw==
+  </data>
+ </layer>
+ <layer name="Meta" width="50" height="50" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJztlsEOwzAIQ3vYv/T//7DHSVOzGdtNVmpLuUQB8koJ7K9t25usT53tnQk959TovuEIh6IqB1tHqO3ojmw9K9/enUvWXzi0uG5/3ThW9Eal9kdnkBjqm8P6q8REYqz6/9CY4Rj7dPpDY864H9qn1TWDg/GPKhz6HnPmm20nDqReKvXL2ir+3XMEa+uYIVx3UWzD8QwOZ19l++8V+UDlzG/17XMqHNiZO3A4eypbk798MpqVj6vf7HDocZRziN0TOdT6V2YBdjZAmRWtzIdT4cD3OnGo9YXUPbLHqjrDsHcJB+4/HHP6YKXvsnK/a6zC8bb/B3Xj6LAOrVBfEw==
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="1" name="SpawnPoint" x="64" y="64" width="64" height="64"/>
+  <object id="2" name="monster1" x="62" y="544" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="3" name="coin1" x="64" y="384" width="64" height="64"/>
+  <object id="4" name="supply1" x="64" y="1152" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply1"/>
+   </properties>
+  </object>
+  <object id="5" name="monster2" x="350" y="862" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster2"/>
+   </properties>
+  </object>
+  <object id="6" name="coin2" x="704" y="1026" width="64" height="64"/>
+  <object id="7" name="coin3" x="64" y="1344" width="64" height="64"/>
+  <object id="8" name="monster3" x="226" y="1186" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="9" name="monster4" x="1120" y="1470" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster2"/>
+   </properties>
+  </object>
+  <object id="10" name="coin4" x="1472" y="1182" width="64" height="64"/>
+  <object id="11" name="supply3" x="864" y="1314" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply1"/>
+   </properties>
+  </object>
+  <object id="12" name="supply2" x="384" y="1344" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply2"/>
+   </properties>
+  </object>
+  <object id="13" name="coin5" x="1470" y="928" width="64" height="64"/>
+  <object id="14" name="supply4" x="864" y="544" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply2"/>
+   </properties>
+  </object>
+  <object id="15" name="coin7" x="704" y="512" width="64" height="64"/>
+  <object id="16" name="coin8" x="318" y="64" width="64" height="64"/>
+  <object id="17" name="supply5" x="542" y="514" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply1"/>
+   </properties>
+  </object>
+  <object id="18" name="monster7" x="864" y="64" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="19" name="supply6" x="704" y="224" width="64" height="64">
+   <properties>
+    <property name="supply_type" value="supply2"/>
+   </properties>
+  </object>
+  <object id="20" name="coin9" x="864" y="386" width="64" height="64"/>
+  <object id="21" name="coin10" x="1280" y="62" width="64" height="64"/>
+  <object id="22" name="coin11" x="1182" y="224" width="64" height="64"/>
+  <object id="23" name="monster6" x="1472" y="384" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster2"/>
+   </properties>
+  </object>
+  <object id="24" name="coin12" x="1344" y="224" width="64" height="64"/>
+  <object id="25" name="monster5" x="1152" y="542" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster1"/>
+   </properties>
+  </object>
+  <object id="26" name="coin6" x="1118" y="992" width="64" height="64"/>
+  <object id="28" name="monster6" x="384" y="702" width="64" height="64">
+   <properties>
+    <property name="monster_type" value="monster2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
